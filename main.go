@@ -1,7 +1,12 @@
 package main
 
-import "fmt"
+import (
+	"PowerPlantManagementApplication/models"
+	"fmt"
+)
 
 func main() {
-	fmt.Println("Hello")
+	var Company models.Company
+	Company.CompanyName = "ford"
+	fmt.Println(Company)
 }
