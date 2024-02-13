@@ -16,7 +16,8 @@ func ConnectDatabase (ctx context.Context) (*mongo.Client, error) {
 	defer cancel()
 	
 	log.Println("Connecting to MongoDb")
-
+	
+	//serverAPI := options.ServerAPI(options.ServerAPIVersion1)
 	mongoClient, err := mongo.Connect(ctx, options.Client().ApplyURI(constants.ConnectionString))
 
 	if err != nil {

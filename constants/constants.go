@@ -1,6 +1,6 @@
 package constants
 
-const ConnectionString = "mongodb+srv://PowerPlant:1234@powerplant.bmho1ar.mongodb.net/?retryWrites=true&w=majority"
+const ConnectionString = "mongodb+srv://admin:admin@powerplant.bmho1ar.mongodb.net/?retryWrites=true&w=majority"
 
 const DatabaseName = "PowerPlant"
 
