@@ -28,18 +28,19 @@ func (controller *UserController)CreateUser (c *gin.Context){
 		return
 	}
 
-	if err := controller.UserService.CreateUser(user); err != nil {
-		c.JSON(http.StatusInternalServerError,gin.H{
+	
+	if qr,err := controller.UserService.CreateUser(user); err != nil {
+		c.JSON(http.StatusConflict,gin.H{
 			"Error":err.Error(),
 		})
 		return
+	}else{
+		c.JSON(http.StatusOK,gin.H{
+			"QR":qr,
+			"Status":"Success user created successfully",
+			"Inserted":user,
+		})
 	}
-
-	c.JSON(http.StatusOK,gin.H{
-		"Status":"Success user created successfully",
-		"Inserted":user,
-	})
-
 }
 
 func (controller *UserController)InsertIP(c *gin.Context){
@@ -68,7 +69,7 @@ func (controller *UserController)InsertIP(c *gin.Context){
 
 func (controller *UserController)ValidateUser(c *gin.Context){
 	type logindata struct{
-    models.User `json:"user"`
+    models.Login `json:"user"`
 	models.IPAddress `json:"ip"`
 	}
 	
@@ -88,9 +89,31 @@ func (controller *UserController)ValidateUser(c *gin.Context){
 		return
 	}
 
-	if err := controller.UserService.ValidateUser(&data.User); err != nil {
+	if err := controller.UserService.ValidateUser(&data.Login); err != nil {
 		c.JSON(http.StatusUnauthorized,gin.H{
 			"Error":"Wrong Username and Password",
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK,gin.H{
+		"Status":"Success",
+		"Message":"Successfully Validated",
+	})
+}
+
+func (controller *UserController)ValidateTotp(c *gin.Context){
+	var Totpcode *models.Login
+	if err := c.ShouldBind(&Totpcode); err != nil {
+		c.JSON(http.StatusBadRequest,gin.H{
+			"Error":"Invalid JSON format",
+		})
+		return
+	}
+
+	if err := controller.UserService.ValidateTotp(Totpcode);err != nil{
+		c.JSON(http.StatusUnauthorized,gin.H{
+			"Error":err.Error(),
 		})
 		return
 	}

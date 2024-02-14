@@ -2,9 +2,14 @@ module PowerPlantManagementApplication
 
 go 1.21.5
 
-require go.mongodb.org/mongo-driver v1.13.1
+require (
+	github.com/pquerna/otp v1.4.0
+	github.com/skip2/go-qrcode v0.0.0-20200617195104-da1b6568686e
+	go.mongodb.org/mongo-driver v1.13.1
+)
 
 require (
+	github.com/boombuler/barcode v1.0.1-0.20190219062509-6c824513bacc // indirect
 	github.com/bytedance/sonic v1.9.1 // indirect
 	github.com/chenzhuoyu/base64x v0.0.0-20221115062448-fe3a3abad311 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.2 // indirect

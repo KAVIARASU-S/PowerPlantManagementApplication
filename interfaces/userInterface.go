@@ -3,8 +3,9 @@ package interfaces
 import "PowerPlantManagementApplication/models"
 
 type Iuser interface{
-	CreateUser (user *models.User) (err error)
-	ValidateUser (user *models.User) (err error)
+	CreateUser (user *models.User) (qr string,err error)
+	ValidateUser (Login *models.Login) (err error)
 	ValidateIP (ip *models.IPAddress) (err error)
 	InsertIP (ip *models.IPAddress) (err error)
+	ValidateTotp (user *models.Login) (err error) 
 }

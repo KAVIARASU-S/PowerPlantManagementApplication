@@ -4,10 +4,13 @@ import (
 	"PowerPlantManagementApplication/interfaces"
 	"PowerPlantManagementApplication/models"
 	"context"
+	"encoding/base64"
 	"errors"
 	"log"
 	"time"
 
+	"github.com/pquerna/otp/totp"
+	"github.com/skip2/go-qrcode"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 )
@@ -24,7 +27,7 @@ func InitUserService(usercollection,ipcollection *mongo.Collection) interfaces.I
 	}
 }
 
-func (userData *UserServiceModel)CreateUser (user *models.User) (err error){
+func (userData *UserServiceModel)CreateUser (user *models.User) (qr string,err error){
 	log.Println("Data entered by user",user)
 
 
@@ -35,31 +38,68 @@ func (userData *UserServiceModel)CreateUser (user *models.User) (err error){
 
 	if check.Err() == nil {
 		log.Println("The user you are trying to create already exists")
-		error := errors.New("User already exists")
-		return error
+		error := errors.New("Username already exists")
+		return "",error
 	}
+
+	Totpcode, qr, err := generateTotp(user) 
+	if err != nil {
+		log.Println("Error generating totp and qr : ", err)
+		return "",err
+	}
+
+	user.Totp = Totpcode
 
 	result, err := userData.UserCollection.InsertOne(ctx, user)
 
 	if err != nil {
 		log.Println("Error inserting to MongoDB: ", err)
-		return err
+		return "",err
 	} else {
 		log.Println("User Inserted to MongoDb successfully")
 	}
 
 	log.Println("Successfully inserted",result)
 
-	return nil
+	return qr,nil
 }
 
-func (userData *UserServiceModel)ValidateUser (user *models.User) (err error){
-	log.Println("Data entered by user to be validated",user)
+func generateTotp(user *models.User) (Totpcode string,qr string,err error){
+	key ,err := totp.Generate(totp.GenerateOpts{
+		Issuer: "Power Plant",
+		AccountName: user.UserName,
+	})
+
+	if err != nil {
+		log.Println("Error in generating totp: ",err)
+		return "","",err
+	}
+
+	otpAuthURL := key.URL()
+
+	totpSecret := key.Secret()
+
+	log.Println("TOTP secret for ",user.UserName, " : ",totpSecret)
+
+	qrCode, err := qrcode.Encode(otpAuthURL,qrcode.Medium,256)
+
+	if err != nil {
+		log.Println("Error while generating qr: ",err)
+		return "", "", err
+	}
+
+	qrCodeBase64 := base64.StdEncoding.EncodeToString(qrCode)
+	
+	return  totpSecret,qrCodeBase64,nil
+}
+
+func (userData *UserServiceModel)ValidateUser (Login *models.Login) (err error){
+	log.Println("Data entered by user to be validated",Login)
 
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
-	result:= userData.UserCollection.FindOne(ctx,user)
+	result:= userData.UserCollection.FindOne(ctx,Login)
 
 	if result.Err() != nil {
 		log.Println("Error validating user: ", err)
@@ -74,6 +114,7 @@ func (userData *UserServiceModel)ValidateUser (user *models.User) (err error){
 	if err := result.Decode(&validatedUser); err != nil {
 		log.Println("Error decoding",err)
 	}
+
 
 	log.Println("Successfully Validated")
 	log.Println("The user is ",validatedUser)
@@ -115,6 +156,37 @@ func (userData *UserServiceModel) ValidateIP(ip *models.IPAddress) (err error){
 	} else {
 		log.Println("IP Address validated successfully")
 	}
+
+	return nil
+}
+
+func (userData *UserServiceModel) ValidateTotp(user *models.Login) (err error){
+	log.Println("Totp entered by the user: ",user.Totp)
+
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	result:= userData.UserCollection.FindOne(ctx,bson.M{"UserName": user.UserName})
+
+	if result.Err() != nil {
+		log.Println("Error validating TOTP: ", err)
+		error := errors.New("Wrong OTP entered")
+		return error
+	}
+
+	var secretuser models.User
+
+	if err := result.Decode(&secretuser); err != nil {
+		log.Println("Error finding Totp code")
+	}
+
+	secret := user.Totp
+	valid := totp.Validate(secret,secretuser.Totp)
+
+	if valid != true {
+		err := errors.New("Wrong OTP entered")
+		return err
+	} 
 
 	return nil
 }
