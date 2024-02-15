@@ -126,3 +126,16 @@ func (controller *UserController)ValidateTotp(c *gin.Context){
 		})
 	}	
 }
+
+func (controller *UserController)DisplayUser(c *gin.Context){
+	allUser,err := controller.UserService.DisplayUser()
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError,gin.H{
+			"Error":err.Error(),
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK,allUser)
+}

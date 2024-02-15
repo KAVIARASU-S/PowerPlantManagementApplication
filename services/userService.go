@@ -204,3 +204,25 @@ func (userData *UserServiceModel) ValidateTotp(user *models.Login) (company stri
 
 	return secretuser.Company,secretuser.Role,secretuser.PowerplantType,nil
 }
+
+func (userData *UserServiceModel) DisplayUser() (allusers *[]models.ShowUser,err error){
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	result,err:=userData.UserCollection.Find(ctx,bson.D{})
+
+	if err != nil {
+		log.Println("Error finding data in MongoDB: ", err)
+		return nil,err
+	} else {
+		log.Println("Found data in MongoDb successfully")
+	}
+	
+	var users []models.ShowUser
+
+	result.All(ctx,&users)
+
+	log.Println("All users returned successfully")
+
+	return &users,nil
+}

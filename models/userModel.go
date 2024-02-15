@@ -19,3 +19,10 @@ type Login struct{
 	Password string `json:"Password" bson:"Password"`
 	Totp string `json:"totp" bson:"totp"`
 }
+
+type ShowUser struct{
+	UserName string `json:"UserName" bson:"UserName"`
+	Company string `json:"Company" bson:"Company"`
+	Role string `json:"Role" bson:"Role"`
+	PowerplantType string `json:"PowerplantType" bson:"PowerplantType"`
+	}
