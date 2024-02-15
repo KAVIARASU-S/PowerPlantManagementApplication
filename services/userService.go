@@ -38,7 +38,7 @@ func (userData *UserServiceModel)CreateUser (user *models.User) (qr string,err e
 
 	if check.Err() == nil {
 		log.Println("The user you are trying to create already exists")
-		error := errors.New("Username already exists")
+		error := errors.New("username already exists")
 		return "",error
 	}
 
@@ -99,11 +99,14 @@ func (userData *UserServiceModel)ValidateUser (Login *models.Login) (err error){
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
-	result:= userData.UserCollection.FindOne(ctx,Login)
+	result:= userData.UserCollection.FindOne(ctx,bson.M{
+        "UserName":Login.UserName,
+        "Password":Login.Password,
+    })
 
 	if result.Err() != nil {
 		log.Println("Error validating user: ", err)
-		error := errors.New("Wrong User name and password")
+		error := errors.New("wrong User name and password")
 		return error
 	} else {
 		log.Println("User found successfully")
@@ -126,6 +129,14 @@ func(userData *UserServiceModel)InsertIP(ip *models.IPAddress) (err error){
 
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
+
+	check := userData.IPCollection.FindOne(ctx,ip)
+
+	if check.Err() == nil {
+		log.Println("The IP you are trying to insert already exists")
+		error := errors.New("ip already exists")
+		return error
+	}
 
 	result, err := userData.IPCollection.InsertOne(ctx, ip)
 
@@ -151,7 +162,7 @@ func (userData *UserServiceModel) ValidateIP(ip *models.IPAddress) (err error){
 
 	if result.Err() != nil {
 		log.Println("Error validating IP: ", err)
-		error := errors.New("Wrong IP Address")
+		error := errors.New("wrong IP Address")
 		return error
 	} else {
 		log.Println("IP Address validated successfully")
@@ -160,8 +171,8 @@ func (userData *UserServiceModel) ValidateIP(ip *models.IPAddress) (err error){
 	return nil
 }
 
-func (userData *UserServiceModel) ValidateTotp(user *models.Login) (err error){
-	log.Println("Totp entered by the user: ",user.Totp)
+func (userData *UserServiceModel) ValidateTotp(user *models.Login) (company string,role string,plantType string,err error){
+	log.Println("Totp entered by the user:",user.UserName,",is : ",user.Totp)
 
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
@@ -170,8 +181,8 @@ func (userData *UserServiceModel) ValidateTotp(user *models.Login) (err error){
 
 	if result.Err() != nil {
 		log.Println("Error validating TOTP: ", err)
-		error := errors.New("Wrong OTP entered")
-		return error
+		error := errors.New("wrong OTP entered")
+		return "", "", "",error
 	}
 
 	var secretuser models.User
@@ -183,10 +194,13 @@ func (userData *UserServiceModel) ValidateTotp(user *models.Login) (err error){
 	secret := user.Totp
 	valid := totp.Validate(secret,secretuser.Totp)
 
-	if valid != true {
-		err := errors.New("Wrong OTP entered")
-		return err
-	} 
+	if !valid {
+		log.Println("Wrong TOTP entered")
+		err := errors.New("wrong OTP entered")
+		return "", "", "",err
+	}
 
-	return nil
+	log.Println("Company of the user ",secretuser.Company)
+
+	return secretuser.Company,secretuser.Role,secretuser.PowerplantType,nil
 }

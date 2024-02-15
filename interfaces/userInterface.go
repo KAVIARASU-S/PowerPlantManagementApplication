@@ -7,5 +7,5 @@ type Iuser interface{
 	ValidateUser (Login *models.Login) (err error)
 	ValidateIP (ip *models.IPAddress) (err error)
 	InsertIP (ip *models.IPAddress) (err error)
-	ValidateTotp (user *models.Login) (err error) 
+	ValidateTotp(user *models.Login) (company string,role string,plantType string,err error)
 }

@@ -55,7 +55,7 @@ func (controller *UserController)InsertIP(c *gin.Context){
 
 	if err := controller.UserService.InsertIP(ip); err != nil {
 		c.JSON(http.StatusInternalServerError,gin.H{
-			"Error":err,
+			"Error":err.Error(),
 		})
 		return
 	}
@@ -111,15 +111,18 @@ func (controller *UserController)ValidateTotp(c *gin.Context){
 		return
 	}
 
-	if err := controller.UserService.ValidateTotp(Totpcode);err != nil{
+	if company,role,plantType,err := controller.UserService.ValidateTotp(Totpcode);err != nil{
 		c.JSON(http.StatusUnauthorized,gin.H{
 			"Error":err.Error(),
 		})
 		return
-	}
-
-	c.JSON(http.StatusOK,gin.H{
-		"Status":"Success",
-		"Message":"Successfully Validated",
-	})
+	}else{
+		c.JSON(http.StatusOK,gin.H{
+			"Status":"Success",
+			"Company":company,
+			"Role":role,
+			"PowerPlantType":plantType,
+			"Message":"Successfully Validated",
+		})
+	}	
 }
