@@ -18,5 +18,5 @@ func UserRoutes (router *gin.Engine,controller controllers.UserController){
 	router.POST("/signIn",controller.ValidateUser)
 	router.POST("/insertIP",controller.InsertIP)
 	router.POST("/totp",controller.ValidateTotp)
-	router.POST("/displayUser",controller.DisplayUser)
+	router.GET("/displayUser",controller.DisplayUser)
 }
