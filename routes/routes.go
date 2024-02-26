@@ -19,4 +19,5 @@ func UserRoutes (router *gin.Engine,controller controllers.UserController){
 	router.POST("/insertIP",controller.InsertIP)
 	router.POST("/totp",controller.ValidateTotp)
 	router.GET("/displayUser",controller.DisplayUser)
+	router.GET("/displayIP",controller.DisplayIP)
 }

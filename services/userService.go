@@ -226,3 +226,25 @@ func (userData *UserServiceModel) DisplayUser() (allusers *[]models.ShowUser,err
 
 	return &users,nil
 }
+
+func (userData *UserServiceModel) DisplayIP() (allusers *[]models.IPAddress,err error){
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	result,err:=userData.IPCollection.Find(ctx,bson.D{})
+
+	if err != nil {
+		log.Println("Error finding data in MongoDB: ", err)
+		return nil,err
+	} else {
+		log.Println("Found data in MongoDb successfully")
+	}
+	
+	var ip []models.IPAddress
+
+	result.All(ctx,&ip)
+
+	log.Println("All users returned successfully")
+
+	return &ip,nil
+}

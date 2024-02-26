@@ -139,3 +139,16 @@ func (controller *UserController)DisplayUser(c *gin.Context){
 
 	c.JSON(http.StatusOK,allUser)
 }
+
+func (controller *UserController)DisplayIP(c *gin.Context){
+	ip,err := controller.UserService.DisplayIP()
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError,gin.H{
+			"Error":err.Error(),
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK,ip)
+}
