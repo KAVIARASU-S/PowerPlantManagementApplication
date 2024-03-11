@@ -51,6 +51,13 @@ func initUser(mongoClient *mongo.Client){
 	routes.UserRoutes(server, userController)
 }
 
+func initTasks (mongoClient *mongo.Client){
+	taskcollection := config.GetCollection(mongoClient, constants.DatabaseName, "Tasks")
+	taskservice := services.InitTasks(taskcollection)
+	taskController := controllers.InitTaskController(taskservice)
+	routes.TaskRoutes(server,taskController)
+}
+
 func main() {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
@@ -67,6 +74,7 @@ func main() {
 
 	initCompany(mongoClient)
 	initUser(mongoClient)
+	initTasks(mongoClient)
 
 	server.Run(constants.Port)
 }

@@ -21,3 +21,10 @@ func UserRoutes (router *gin.Engine,controller controllers.UserController){
 	router.GET("/displayUser",controller.DisplayUser)
 	router.GET("/displayIP",controller.DisplayIP)
 }
+
+func TaskRoutes (router *gin.Engine, controller controllers.TaskController){
+	router.GET("/displayTasks",controller.DisplayTasks)
+	router.POST("/insertTask",controller.InsertTask)
+	router.POST("/updateTask",controller.UpdateTask)
+	router.POST("/deleteTask",controller.DeleteTask)
+}

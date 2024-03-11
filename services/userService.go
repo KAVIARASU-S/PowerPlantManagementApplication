@@ -244,7 +244,7 @@ func (userData *UserServiceModel) DisplayIP() (allusers *[]models.IPAddress,err 
 
 	result.All(ctx,&ip)
 
-	log.Println("All users returned successfully")
+	log.Println("All IP returned successfully")
 
 	return &ip,nil
 }
