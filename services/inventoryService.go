@@ -2,7 +2,12 @@ package services
 
 import (
 	"PowerPlantManagementApplication/interfaces"
+	"PowerPlantManagementApplication/models"
+	"context"
+	"log"
+	"time"
 
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -10,10 +15,94 @@ type InventoryServiceModel struct {
 	InventoryCollection *mongo.Collection
 }
 
-func InitInventory (collection *mongo.Collection)(interfaces.IInventory){
+func InitInventory(collection *mongo.Collection) interfaces.IInventory {
 	return &InventoryServiceModel{
 		InventoryCollection: collection,
 	}
 }
 
-func 
+func (inventoryData *InventoryServiceModel) DisplayItems()(allitems *[]models.Inventory,err error){
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	result,err := inventoryData.InventoryCollection.Find(ctx,bson.M{})
+	if err != nil {
+		log.Println("Error Finding Items in mongoDB ",err)
+		return nil,err
+	}
+
+	log.Println("Successfully found Items in mongoDb")
+
+	var items []models.Inventory
+
+	result.All(ctx,&items)
+
+	return &items,nil
+}
+
+func (inventoryData *InventoryServiceModel) AddItem(item *models.Inventory) (err error) {
+	log.Println("Item to be Added ", item)
+
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	result, err := inventoryData.InventoryCollection.InsertOne(ctx, item)
+
+	if err != nil {
+		log.Println("Error inserting Items in mongoDB")
+		return err
+	}
+    
+	log.Println("Successfully Inserted Item",result)
+
+	return nil
+}
+
+func (inventoryData *InventoryServiceModel) UpdateItem(item *models.Inventory)(err error){
+	log.Println("Item to be updated ",item)
+
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	filter := bson.M{
+		"ItemName":item.ItemName,
+		"Brand":item.Brand,
+}
+	update := bson.D{
+		{"$set",bson.D{
+			{"Quantity",item.Quantity},
+		},
+	},
+	}
+	result, err := inventoryData.InventoryCollection.UpdateOne(ctx,filter,update)
+
+	if err != nil {
+		log.Println("Error when updating item",err)
+		return err
+	}
+
+	log.Println("Sucessfully Updated Item",result)
+
+	return nil
+}
+
+func (inventoryData *InventoryServiceModel) DeleteItem(item *models.Inventory) (err error){
+	log.Println("The item to be deleted is ", item)
+
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+	
+	filter := bson.M{
+		"ItemName":item.ItemName,
+		"Brand":item.Brand,
+	}
+	result,err := inventoryData.InventoryCollection.DeleteOne(ctx,filter)
+
+	if err != nil {
+		log.Println("Error when updating item",err)
+		return err
+	}
+
+	log.Println("Successfully Deleted the item",result)
+	return nil
+}

@@ -110,11 +110,11 @@ func (taskdata *TaskServiceModel) DeleteTask (task *models.Tasks) (err error){
 	result,err := taskdata.TaskCollection.DeleteOne(ctx,filter)
 
 	if err != nil {
-		log.Println("Error Deleting the task",result)
+		log.Println("Error Deleting the task",err)
 		return err
 	}
 
-	log.Println("Successfully deleted the task")
+	log.Println("Successfully deleted the task ",result)
 
 	return nil
 }

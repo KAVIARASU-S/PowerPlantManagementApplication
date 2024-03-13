@@ -172,7 +172,7 @@ func (userData *UserServiceModel) ValidateIP(ip *models.IPAddress) (err error){
 }
 
 func (userData *UserServiceModel) ValidateTotp(user *models.Login) (company string,role string,plantType string,err error){
-	log.Println("Totp entered by the user:",user.UserName,",is : ",user.Totp)
+	log.Println("Totp entered by the user: ",user.UserName," is : ",user.Totp)
 
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()

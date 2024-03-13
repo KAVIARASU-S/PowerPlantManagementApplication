@@ -25,4 +25,4 @@ type ShowUser struct{
 	Company string `json:"Company" bson:"Company"`
 	Role string `json:"Role" bson:"Role"`
 	PowerplantType string `json:"PowerplantType" bson:"PowerplantType"`
-	}
+}
