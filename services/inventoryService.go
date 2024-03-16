@@ -13,31 +13,33 @@ import (
 
 type InventoryServiceModel struct {
 	InventoryCollection *mongo.Collection
+	PurchaseCollection *mongo.Collection
 }
 
-func InitInventory(collection *mongo.Collection) interfaces.IInventory {
+func InitInventory(inventoryCollection *mongo.Collection,purchaseCollection *mongo.Collection) interfaces.IInventory {
 	return &InventoryServiceModel{
-		InventoryCollection: collection,
+		InventoryCollection: inventoryCollection,
+		PurchaseCollection: purchaseCollection,
 	}
 }
 
-func (inventoryData *InventoryServiceModel) DisplayItems()(allitems *[]models.Inventory,err error){
+func (inventoryData *InventoryServiceModel) DisplayItems() (allitems *[]models.Inventory, err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
-	result,err := inventoryData.InventoryCollection.Find(ctx,bson.M{})
+	result, err := inventoryData.InventoryCollection.Find(ctx, bson.M{})
 	if err != nil {
-		log.Println("Error Finding Items in mongoDB ",err)
-		return nil,err
+		log.Println("Error Finding Items in mongoDB ", err)
+		return nil, err
 	}
 
 	log.Println("Successfully found Items in mongoDb")
 
 	var items []models.Inventory
 
-	result.All(ctx,&items)
+	result.All(ctx, &items)
 
-	return &items,nil
+	return &items, nil
 }
 
 func (inventoryData *InventoryServiceModel) AddItem(item *models.Inventory) (err error) {
@@ -49,60 +51,120 @@ func (inventoryData *InventoryServiceModel) AddItem(item *models.Inventory) (err
 	result, err := inventoryData.InventoryCollection.InsertOne(ctx, item)
 
 	if err != nil {
-		log.Println("Error inserting Items in mongoDB")
+		log.Println("Error inserting Item in mongoDB")
 		return err
 	}
-    
-	log.Println("Successfully Inserted Item",result)
+
+	log.Println("Successfully Inserted Item", result)
 
 	return nil
 }
 
-func (inventoryData *InventoryServiceModel) UpdateItem(item *models.Inventory)(err error){
-	log.Println("Item to be updated ",item)
+func (inventoryData *InventoryServiceModel) UpdateItem(item *models.Inventory) (err error) {
+	log.Println("Item to be updated ", item)
 
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
 	filter := bson.M{
-		"ItemName":item.ItemName,
-		"Brand":item.Brand,
-}
-	update := bson.D{
-		{"$set",bson.D{
-			{"Quantity",item.Quantity},
-		},
-	},
+		"ItemName": item.ItemName,
+		"Brand":    item.Brand,
 	}
-	result, err := inventoryData.InventoryCollection.UpdateOne(ctx,filter,update)
+
+	update := bson.D{
+		{Key: "$set", Value: bson.D{
+			{Key: "Quantity", Value: item.Quantity},
+		}},
+	}
+
+	result, err := inventoryData.InventoryCollection.UpdateOne(ctx, filter, update)
 
 	if err != nil {
-		log.Println("Error when updating item",err)
+		log.Println("Error when updating item", err)
 		return err
 	}
 
-	log.Println("Sucessfully Updated Item",result)
+	log.Println("Sucessfully Updated Item", result)
 
 	return nil
 }
 
-func (inventoryData *InventoryServiceModel) DeleteItem(item *models.Inventory) (err error){
+func (inventoryData *InventoryServiceModel) DeleteItem(item *models.Inventory) (err error) {
 	log.Println("The item to be deleted is ", item)
 
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
-	
+
 	filter := bson.M{
-		"ItemName":item.ItemName,
-		"Brand":item.Brand,
+		"ItemName": item.ItemName,
+		"Brand":    item.Brand,
 	}
-	result,err := inventoryData.InventoryCollection.DeleteOne(ctx,filter)
+	result, err := inventoryData.InventoryCollection.DeleteOne(ctx, filter)
 
 	if err != nil {
-		log.Println("Error when updating item",err)
+		log.Println("Error when updating item", err)
 		return err
 	}
 
-	log.Println("Successfully Deleted the item",result)
+	log.Println("Successfully Deleted the item", result)
 	return nil
+}
+
+func (inventoryData *InventoryServiceModel) DisplayPurchase() (allpurchase *[]models.Inventory,err error){
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	result,err := inventoryData.PurchaseCollection.Find(ctx,bson.M{})
+	if err != nil {
+		log.Println("Error Finding Items in mongoDB ", err)
+		return nil, err
+	}
+
+	log.Println("Successfully found Items in mongoDb")
+
+	var purchase []models.Inventory
+
+	result.All(ctx, &purchase)
+	return &purchase,nil
+}
+
+
+func (inventoryData *InventoryServiceModel) AddPurchase(item *models.Inventory) (err error){
+	log.Println("The item to be added for purchase is ", item)
+
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	result, err := inventoryData.PurchaseCollection.InsertOne(ctx, item)
+
+	if err != nil {
+		log.Println("Error inserting Purchase Item in mongoDB")
+		return err
+	}
+
+	log.Println("Successfully Inserted Purchase Item", result)
+
+	return nil 
+}
+
+func (inventoryData *InventoryServiceModel) DeletePurchase(item *models.Inventory) (err error){
+	log.Println("The item to be deleted form purchase is ", item)
+
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	filter := bson.M{
+		"ItemName": item.ItemName,
+		"Brand":    item.Brand,
+	}
+	result, err := inventoryData.PurchaseCollection.DeleteOne(ctx,filter)
+
+	if err != nil {
+		log.Println("Error deleting Purchase Item in mongoDB")
+		return err
+	}
+
+	log.Println("Successfully Deleted Purchase Item", result)
+
+	return nil 
 }

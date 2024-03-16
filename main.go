@@ -16,7 +16,6 @@ import (
 )
 
 var (
-	mongoClient *mongo.Client
 	server      *gin.Engine
 )
 
@@ -51,11 +50,27 @@ func initUser(mongoClient *mongo.Client){
 	routes.UserRoutes(server, userController)
 }
 
-func initTasks (mongoClient *mongo.Client){
+func initTasks(mongoClient *mongo.Client){
 	taskcollection := config.GetCollection(mongoClient, constants.DatabaseName, "Tasks")
 	taskservice := services.InitTasks(taskcollection)
 	taskController := controllers.InitTaskController(taskservice)
 	routes.TaskRoutes(server,taskController)
+}
+
+func initInventory(mongoClient *mongo.Client){
+	inventorycollection := config.GetCollection(mongoClient, constants.DatabaseName, "Inventory")
+	purchasecollection := config.GetCollection(mongoClient, constants.DatabaseName, "Purchase")
+	inventoryservice := services.InitInventory(inventorycollection,purchasecollection)
+	inventoryController := controllers.InitInventoryController(inventoryservice)
+	routes.InventoryRoutes(server,inventoryController)
+}
+
+
+func initRoutes(mongoClient *mongo.Client){
+	initCompany(mongoClient)
+	initUser(mongoClient)
+	initTasks(mongoClient)
+	initInventory(mongoClient)
 }
 
 func main() {
@@ -72,9 +87,7 @@ func main() {
 	server = gin.Default()
 	server.Use(corsMiddleware())
 
-	initCompany(mongoClient)
-	initUser(mongoClient)
-	initTasks(mongoClient)
+	initRoutes(mongoClient)
 
 	server.Run(constants.Port)
 }

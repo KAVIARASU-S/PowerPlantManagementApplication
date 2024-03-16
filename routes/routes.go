@@ -28,3 +28,13 @@ func TaskRoutes (router *gin.Engine, controller controllers.TaskController){
 	router.POST("/updateTask",controller.UpdateTask)
 	router.POST("/deleteTask",controller.DeleteTask)
 }
+
+func InventoryRoutes (router *gin.Engine, controller controllers.InventoryController){
+	router.GET("/displayItems",controller.DisplayItems)
+	router.POST("/addItem",controller.AddItem)
+	router.POST("/updateItem",controller.UpdateItem)
+	router.POST("/deleteItem",controller.DeleteItem)
+	router.GET("/displayPurchase",controller.DisplayPurchase)
+	router.POST("/addPurchase",controller.AddPurchase)
+	router.POST("/deletePurchase",controller.DeletePurchase)
+}
