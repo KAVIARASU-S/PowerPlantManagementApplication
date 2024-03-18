@@ -65,12 +65,19 @@ func initInventory(mongoClient *mongo.Client){
 	routes.InventoryRoutes(server,inventoryController)
 }
 
+func initSensors(mongoClient *mongo.Client){
+	sensorcollection := config.GetCollection(mongoClient, constants.DatabaseName, "Sensors")
+	sensorservice := services.InitSensors(sensorcollection)
+	sensorController := controllers.InitSensorController(sensorservice)
+	routes.SensorRoutes(server,sensorController)
+}
 
 func initRoutes(mongoClient *mongo.Client){
 	initCompany(mongoClient)
 	initUser(mongoClient)
 	initTasks(mongoClient)
 	initInventory(mongoClient)
+	initSensors(mongoClient)
 }
 
 func main() {
@@ -82,6 +89,7 @@ func main() {
 
 	if err != nil {
 		log.Printf("Not Connected to Database! Resolve the issue!!!")
+		log.Println(err)
 	}
 
 	server = gin.Default()

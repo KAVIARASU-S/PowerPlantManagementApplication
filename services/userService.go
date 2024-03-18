@@ -53,7 +53,7 @@ func (userData *UserServiceModel)CreateUser (user *models.User) (qr string,err e
 	result, err := userData.UserCollection.InsertOne(ctx, user)
 
 	if err != nil {
-		log.Println("Error inserting to MongoDB: ", err)
+		log.Println("Error inserting user to MongoDB: ", err)
 		return "",err
 	} else {
 		log.Println("User Inserted to MongoDb successfully")
@@ -141,7 +141,7 @@ func(userData *UserServiceModel)InsertIP(ip *models.IPAddress) (err error){
 	result, err := userData.IPCollection.InsertOne(ctx, ip)
 
 	if err != nil {
-		log.Println("Error inserting to MongoDB: ", err)
+		log.Println("Error inserting IP to MongoDB: ", err)
 		return err
 	} else {
 		log.Println("IP Inserted to MongoDb successfully")
@@ -220,7 +220,11 @@ func (userData *UserServiceModel) DisplayUser() (allusers *[]models.ShowUser,err
 	
 	var users []models.ShowUser
 
-	result.All(ctx,&users)
+	err = result.All(ctx,&users)
+
+	if err != nil {
+		log.Println("Error parsing the users to slice",err)
+	}
 
 	log.Println("All users returned successfully")
 
@@ -242,7 +246,11 @@ func (userData *UserServiceModel) DisplayIP() (allusers *[]models.IPAddress,err 
 	
 	var ip []models.IPAddress
 
-	result.All(ctx,&ip)
+	err = result.All(ctx,&ip)
+
+	if err != nil {
+		log.Println("Error parsing the ip to slice",err)
+	}
 
 	log.Println("All IP returned successfully")
 

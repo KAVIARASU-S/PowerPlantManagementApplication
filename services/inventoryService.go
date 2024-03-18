@@ -37,7 +37,11 @@ func (inventoryData *InventoryServiceModel) DisplayItems() (allitems *[]models.I
 
 	var items []models.Inventory
 
-	result.All(ctx, &items)
+	err = result.All(ctx, &items)
+
+	if err != nil {
+		log.Println("Error parsing the items to slice",err)
+	}
 
 	return &items, nil
 }
@@ -102,7 +106,7 @@ func (inventoryData *InventoryServiceModel) DeleteItem(item *models.Inventory) (
 	result, err := inventoryData.InventoryCollection.DeleteOne(ctx, filter)
 
 	if err != nil {
-		log.Println("Error when updating item", err)
+		log.Println("Error when deleting item", err)
 		return err
 	}
 
@@ -116,11 +120,11 @@ func (inventoryData *InventoryServiceModel) DisplayPurchase() (allpurchase *[]mo
 
 	result,err := inventoryData.PurchaseCollection.Find(ctx,bson.M{})
 	if err != nil {
-		log.Println("Error Finding Items in mongoDB ", err)
+		log.Println("Error Finding Purchase Items in mongoDB ", err)
 		return nil, err
 	}
 
-	log.Println("Successfully found Items in mongoDb")
+	log.Println("Successfully found Purchase Items in mongoDb")
 
 	var purchase []models.Inventory
 
@@ -138,7 +142,7 @@ func (inventoryData *InventoryServiceModel) AddPurchase(item *models.Inventory) 
 	result, err := inventoryData.PurchaseCollection.InsertOne(ctx, item)
 
 	if err != nil {
-		log.Println("Error inserting Purchase Item in mongoDB")
+		log.Println("Error inserting Purchase Item in mongoDB",err)
 		return err
 	}
 

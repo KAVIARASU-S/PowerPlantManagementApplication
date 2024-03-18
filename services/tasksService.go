@@ -38,6 +38,9 @@ func(taskdata *TaskServiceModel) DisplayTasks ()(alltasks *[]models.Tasks,err er
 	var tasks []models.Tasks
 
 	result.All(ctx,&tasks)
+	if err != nil {
+		log.Println("Error parsing the tasks to slice",err)
+	}
 
 	log.Println("All tasks returned successfully")
 
@@ -54,7 +57,7 @@ func (taskdata *TaskServiceModel)InsertTask (task *models.Tasks)(err error){
 	result,err := taskdata.TaskCollection.InsertOne(ctx,task)
 
 	if err != nil {
-		log.Println("Error inserting Tasks in mongoDB")
+		log.Println("Error inserting Tasks in mongoDB",err)
 		return err
 	}
 

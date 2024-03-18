@@ -34,7 +34,11 @@ func (companyData *CompanyServiceModel) DisplayCompany () (*[]models.Company,err
 
 	var results []models.Company
 
-	result.All(ctx, &results)
+	err = result.All(ctx, &results)
+
+	if err != nil {
+		log.Println("Error parsing the companies to slice",err)
+	}
 
 	for _, i := range results {
 		log.Println(i)

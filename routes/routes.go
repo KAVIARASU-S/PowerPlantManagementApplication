@@ -38,3 +38,10 @@ func InventoryRoutes (router *gin.Engine, controller controllers.InventoryContro
 	router.POST("/addPurchase",controller.AddPurchase)
 	router.POST("/deletePurchase",controller.DeletePurchase)
 }
+
+func SensorRoutes (router *gin.Engine,controller controllers.SensorController){
+	router.GET("/displaySensors",controller.DisplaySensors)
+	router.POST("/insertSensor",controller.InsertSensor)
+	router.POST("/updateSensor",controller.UpdateSensor)
+	router.POST("/deleteSensor",controller.DeleteSensor)
+}
