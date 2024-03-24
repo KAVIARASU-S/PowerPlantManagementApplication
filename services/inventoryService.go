@@ -58,7 +58,7 @@ func (inventoryData *InventoryServiceModel) AddItem(item *models.Inventory) (err
 	result, err := inventoryData.InventoryCollection.InsertOne(ctx, item)
 
 	if err != nil {
-		log.Println("Error inserting Item in mongoDB")
+		log.Println("Error inserting Item in mongoDB",err)
 		return err
 	}
 

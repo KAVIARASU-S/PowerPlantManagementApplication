@@ -72,12 +72,20 @@ func initSensors(mongoClient *mongo.Client){
 	routes.SensorRoutes(server,sensorController)
 }
 
+func InitAccounting(mongoClient *mongo.Client){
+	accountingcollection := config.GetCollection(mongoClient, constants.DatabaseName, "Accounting")
+	accountingservice := services.InitAccounting(accountingcollection)
+	accountingController := controllers.InitAccountingController(accountingservice)
+	routes.AccountingRoutes(server,accountingController)
+}
+
 func initRoutes(mongoClient *mongo.Client){
 	initCompany(mongoClient)
 	initUser(mongoClient)
 	initTasks(mongoClient)
 	initInventory(mongoClient)
 	initSensors(mongoClient)
+	InitAccounting(mongoClient)
 }
 
 func main() {

@@ -45,3 +45,8 @@ func SensorRoutes (router *gin.Engine,controller controllers.SensorController){
 	router.POST("/updateSensor",controller.UpdateSensor)
 	router.POST("/deleteSensor",controller.DeleteSensor)
 }
+
+func AccountingRoutes (router *gin.Engine,controller controllers.AccountingController){
+	router.GET("/displayTransactions",controller.DisplayTransactions)
+	router.POST("/insertTransaction",controller.InsertTransaction)
+}
