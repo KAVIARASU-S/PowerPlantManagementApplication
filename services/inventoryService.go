@@ -9,6 +9,7 @@ import (
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 type InventoryServiceModel struct {
@@ -27,7 +28,9 @@ func (inventoryData *InventoryServiceModel) DisplayItems() (allitems *[]models.I
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
-	result, err := inventoryData.InventoryCollection.Find(ctx, bson.M{})
+	opts := options.Find().SetSort(map[string]int{"ReplacementDate": 1})
+
+	result, err := inventoryData.InventoryCollection.Find(ctx, bson.M{},opts)
 	if err != nil {
 		log.Println("Error Finding Items in mongoDB ", err)
 		return nil, err

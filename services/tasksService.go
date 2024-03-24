@@ -9,6 +9,7 @@ import (
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 type TaskServiceModel struct {
@@ -26,7 +27,9 @@ func(taskdata *TaskServiceModel) DisplayTasks ()(alltasks *[]models.Tasks,err er
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
-	result,err:=taskdata.TaskCollection.Find(ctx,bson.D{})
+	opts := options.Find().SetSort(map[string]int{"Deadline": 1})
+
+	result,err:=taskdata.TaskCollection.Find(ctx,bson.D{},opts)
 
 	if err != nil {
 		log.Println("Error finding data in MongoDB: ", err)
