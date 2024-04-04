@@ -49,4 +49,5 @@ func SensorRoutes (router *gin.Engine,controller controllers.SensorController){
 func AccountingRoutes (router *gin.Engine,controller controllers.AccountingController){
 	router.GET("/displayTransactions",controller.DisplayTransactions)
 	router.POST("/insertTransaction",controller.InsertTransaction)
+	router.GET("/displayAccounting",controller.DisplayAccounting)
 }

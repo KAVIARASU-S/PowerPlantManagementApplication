@@ -52,3 +52,16 @@ func (controller *AccountingController) InsertTransaction(c *gin.Context) {
 		"Status": "Transaction inserted successfully",
 	})
 }
+
+func (controller *AccountingController) DisplayAccounting(c *gin.Context){
+	allAccounts,err := controller.AccountingService.DisplayAccounting()
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"Error": err.Error(),
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, allAccounts)
+}
