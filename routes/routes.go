@@ -11,7 +11,6 @@ import (
 func Routes(router *gin.Engine,controller controllers.CompanyController) {
 	router.GET("/sample",controller.DisplayCompany)
 	router.POST("/sample",controller.InsertCompany)
-	router.Static("/OptimusPower","./UI/login")
 }
 
 func UserRoutes (router *gin.Engine,controller controllers.UserController){
