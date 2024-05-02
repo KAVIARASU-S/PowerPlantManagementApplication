@@ -20,7 +20,16 @@ func InitSensorController(sensorservice interfaces.ISensor) SensorController {
 }
 
 func (controller *SensorController) DisplaySensors(c *gin.Context) {
-	allSensors, err := controller.SensorService.DisplaySensors()
+	var searchFilter models.SearchFilter
+
+	if err := c.ShouldBindJSON(&searchFilter); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"Error": "Invalid Json format",
+		})
+		return
+	}
+
+	allSensors, err := controller.SensorService.DisplaySensors(searchFilter)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{

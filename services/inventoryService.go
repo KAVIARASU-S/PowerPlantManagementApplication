@@ -24,13 +24,14 @@ func InitInventory(inventoryCollection *mongo.Collection,purchaseCollection *mon
 	}
 }
 
-func (inventoryData *InventoryServiceModel) DisplayItems() (allitems *[]models.Inventory, err error) {
+func (inventoryData *InventoryServiceModel) DisplayItems(searchFilter *models.SearchFilter) (allitems *[]models.Inventory, err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
+	filter := bson.M{"CompanyName":searchFilter.CompanyName}
 	opts := options.Find().SetSort(map[string]int{"ReplacementDate": 1})
 
-	result, err := inventoryData.InventoryCollection.Find(ctx, bson.M{},opts)
+	result, err := inventoryData.InventoryCollection.Find(ctx, filter, opts)
 	if err != nil {
 		log.Println("Error Finding Items in mongoDB ", err)
 		return nil, err
@@ -117,11 +118,12 @@ func (inventoryData *InventoryServiceModel) DeleteItem(item *models.Inventory) (
 	return nil
 }
 
-func (inventoryData *InventoryServiceModel) DisplayPurchase() (allpurchase *[]models.Inventory,err error){
+func (inventoryData *InventoryServiceModel) DisplayPurchase(searchFilter *models.SearchFilter) (allpurchase *[]models.Inventory,err error){
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
-	result,err := inventoryData.PurchaseCollection.Find(ctx,bson.M{})
+	filter := bson.M{"CompanyName":searchFilter.CompanyName}
+	result,err := inventoryData.PurchaseCollection.Find(ctx,filter)
 	if err != nil {
 		log.Println("Error Finding Purchase Items in mongoDB ", err)
 		return nil, err

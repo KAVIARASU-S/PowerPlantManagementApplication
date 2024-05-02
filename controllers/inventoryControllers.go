@@ -17,7 +17,16 @@ func InitInventoryController(inventoryService interfaces.IInventory) InventoryCo
 }
 
 func (controller *InventoryController) DisplayItems(c *gin.Context) {
-	allItems, err := controller.InventoryService.DisplayItems()
+	var searchFilter models.SearchFilter
+
+	if err := c.ShouldBindJSON(&searchFilter); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"Error": "Invalid Json format",
+		})
+		return
+	}
+
+	allItems, err := controller.InventoryService.DisplayItems(&searchFilter)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
@@ -96,7 +105,16 @@ func (controller *InventoryController) DeleteItem(c *gin.Context) {
 }
 
 func (controller *InventoryController) DisplayPurchase(c *gin.Context) {
-	allPurchase, err := controller.InventoryService.DisplayPurchase()
+	var searchFilter models.SearchFilter
+
+	if err := c.ShouldBindJSON(&searchFilter); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"Error": "Invalid Json format",
+		})
+		return
+	}
+
+	allPurchase, err := controller.InventoryService.DisplayPurchase(&searchFilter)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{

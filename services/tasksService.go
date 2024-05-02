@@ -22,14 +22,15 @@ func InitTasks(collection *mongo.Collection)(interfaces.ITasks){
 	}
 }
 
-func(taskdata *TaskServiceModel) DisplayTasks ()(alltasks *[]models.Tasks,err error){
+func(taskdata *TaskServiceModel) DisplayTasks (searchFilter *models.SearchFilter)(alltasks *[]models.Tasks,err error){
 	
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
+	filter := bson.M{"CompanyName":searchFilter.CompanyName}
 	opts := options.Find().SetSort(map[string]int{"Deadline": 1})
 
-	result,err:=taskdata.TaskCollection.Find(ctx,bson.D{},opts)
+	result,err:=taskdata.TaskCollection.Find(ctx,filter,opts)
 
 	if err != nil {
 		log.Println("Error finding data in MongoDB: ", err)

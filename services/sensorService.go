@@ -21,11 +21,12 @@ func InitSensors(sensorCollection *mongo.Collection) interfaces.ISensor {
 	}
 }
 
-func (sensorData *SensorService) DisplaySensors() (allSensors *[]models.Sensors,err error) {
+func (sensorData *SensorService) DisplaySensors(searchFilter models.SearchFilter) (allSensors *[]models.Sensors,err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
-	result, err := sensorData.SensorCollection.Find(ctx, bson.M{})
+	filter := bson.M{"CompanyName":searchFilter.CompanyName}
+	result, err := sensorData.SensorCollection.Find(ctx, filter)
 	if err != nil {
 		log.Println("Error Finding Items in mongoDB ", err)
 		return nil, err
