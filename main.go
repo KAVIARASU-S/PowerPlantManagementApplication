@@ -6,6 +6,7 @@ import (
 	"PowerPlantManagementApplication/controllers"
 	"PowerPlantManagementApplication/routes"
 	"PowerPlantManagementApplication/services"
+	"PowerPlantManagementApplication/title"
 	"context"
 	"log"
 	"net/http"
@@ -89,16 +90,23 @@ func initRoutes(mongoClient *mongo.Client){
 }
 
 func main() {
+	title.PrintTitle()
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
 	mongoClient, err := config.ConnectDatabase(ctx)
-	defer mongoClient.Disconnect(ctx)
-
 	if err != nil {
 		log.Printf("Not Connected to Database! Resolve the issue!!!")
 		log.Println(err)
+		if err.Error() == "error parsing uri: lookup _mongodb._tcp.powerplant.bmho1ar.mongodb.net: dnsquery: No DNS servers configured for local system."{
+			log.Println("Connect to the internet.")
+		}
+		return
 	}
+	
+	defer mongoClient.Disconnect(ctx)
+
+	
 
 	server = gin.Default()
 	server.Use(corsMiddleware())
