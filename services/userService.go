@@ -66,7 +66,7 @@ func (userData *UserServiceModel)CreateUser (user *models.User) (qr string,err e
 
 func generateTotp(user *models.User) (Totpcode string,qr string,err error){
 	key ,err := totp.Generate(totp.GenerateOpts{
-		Issuer: "Power Plant",
+		Issuer: "Optimus Power",
 		AccountName: user.UserName,
 	})
 
@@ -205,11 +205,19 @@ func (userData *UserServiceModel) ValidateTotp(user *models.Login) (company stri
 	return secretuser.Company,secretuser.Role,secretuser.PowerplantType,nil
 }
 
-func (userData *UserServiceModel) DisplayUser() (allusers *[]models.ShowUser,err error){
+func (userData *UserServiceModel) DisplayUser(searchFilter *models.SearchFilter) (allusers *[]models.ShowUser,err error){
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
-	result,err:=userData.UserCollection.Find(ctx,bson.D{})
+	var filter bson.M
+
+	if searchFilter.CompanyName == "SuperAdmin" {
+		filter = bson.M{"Role":"CompanyAdmin"}	
+	}else{
+		filter = bson.M{"Company":searchFilter.CompanyName}
+	}
+
+	result,err:=userData.UserCollection.Find(ctx,filter)
 
 	if err != nil {
 		log.Println("Error finding data in MongoDB: ", err)

@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
+	<meta name="author" content="Optimus Power">
+	<meta name="keywords"
+		content="Optimus Power, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="shortcut icon" href="img/icons/Power_Plant_logo.jpeg" />
+
+	<link rel="canonical" href="https://demo-basic.Optimus Power.io/pages-profile.html" />
+
+	<title>Tasks</title>
+
+	<link href="css/app.css" rel="stylesheet">
+	<link href="mycode/css/users.css" rel="stylesheet">
+	<link href="mycode/css/tasks.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	<script src="./mycode/js/authorization.js"></script>
+</head>
+
+<body>
+	<div class="wrapper">
+		<nav id="sidebar" class="sidebar js-sidebar">
+			<div class="sidebar-content js-simplebar">
+				<a class="sidebar-brand" href="#">
+					<span class="align-middle">Optimus Power</span>
+				</a>
+
+				<ul class="sidebar-nav">
+
+					<li id="superadmindashboard0" class="sidebar-item">
+						<a class="sidebar-link" href="dashboard-superadmin.html">
+			  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+			</a>
+					</li>
+
+					<li id="dashboard0" class="sidebar-item">
+						<a class="sidebar-link" href="index.html">
+							<i class="align-middle" data-feather="sliders"></i> <span
+								class="align-middle">Dashboard</span>
+						</a>
+					</li>
+
+					<li id="roi0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-roi.html">
+							<i class="align-middle" data-feather="grid"></i> <span class="align-middle">ROI</span>
+						</a>
+					</li>
+
+
+
+					<li id="users0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-users.html">
+							<i class="align-middle" data-feather="user"></i> <span class="align-middle">Users</span>
+						</a>
+					</li>
+
+					<li id="ipaddress0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-ipaddress.html">
+							<i class="align-middle" data-feather="map-pin"></i> <span class="align-middle">IP
+								Address</span>
+						</a>
+					</li>
+
+					<li id="accounting0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-accounting.html">
+							<i class="align-middle" data-feather="layers"></i> <span
+								class="align-middle">Accounting</span>
+						</a>
+					</li>
+
+					<li id="transactions0" class="sidebar-item">
+						<a class="sidebar-link" href="../accounting/accounting.html">
+							<i class="align-middle" data-feather="dollar-sign"></i> <span
+								class="align-middle">Transactions</span>
+						</a>
+					</li>
+
+					<li id="tasks0" class="sidebar-item active">
+						<a class="sidebar-link" href="pages-tasks.html">
+							<i class="align-middle" data-feather="crosshair"></i> <span
+								class="align-middle">Tasks</span>
+						</a>
+					</li>
+
+					<li id="inventory0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-inventory.html">
+              <i class="align-middle" data-feather="box"></i> <span class="align-middle">Inventory</span>
+            </a>
+					</li>
+
+					<li id="purchase0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-purchase.html">
+              <i class="align-middle" data-feather="download"></i> <span class="align-middle">Purchase</span>
+            </a>
+					</li>
+
+
+					<li id="livedata0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-livedata.html">
+              <i class="align-middle" data-feather="activity"></i> <span class="align-middle">Live Data</span>
+            </a>
+					</li>
+
+					<li id="sensors0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-sensors.html">
+              <i class="align-middle" data-feather="compass"></i> <span class="align-middle">Sensors</span>
+            </a>
+					</li>
+
+                    <li id="calculator0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-calculations.html">
+			  <i class="align-middle" data-feather="grid"></i> <span class="align-middle">Calculator</span>
+			</a>
+					</li>
+
+
+				</ul>
+
+
+			</div>
+		</nav>
+
+		<div class="main">
+			<nav class="navbar navbar-expand navbar-light navbar-bg">
+				<a class="sidebar-toggle js-sidebar-toggle">
+					<i class="hamburger align-self-center"></i>
+				</a>
+
+				<div class="navbar-collapse collapse">
+					<ul class="navbar-nav navbar-align">
+
+
+						<li class="nav-item dropdown">
+							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#"
+								data-bs-toggle="dropdown">
+								<i class="align-middle" data-feather="settings"></i>
+							</a>
+
+							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#"
+								data-bs-toggle="dropdown">
+								<img src="img/avatars/avatar.png" class="avatar img-fluid rounded me-1"
+									alt="Admin" /> <span id="adminName" class="text-dark"></span>
+							</a>
+							<script>
+								document.addEventListener( 'DOMContentLoaded', function (){
+									let username = localStorage.getItem('username')
+									if (username === null){
+									document.getElementById("adminName").innerHTML = "Not Logged In";
+							        window.location.href = "../Notloggedin/notLoggedin.html";
+									return;
+									}
+									document.getElementById("adminName").innerHTML = username;
+									
+								})
+							</script>
+							<div class="dropdown-menu dropdown-menu-end" style="min-width: 10px;border-radius: 10px;margin-right: 2%;">
+								<a class="dropdown-item" href="#" onclick="logout()" style="color: red;">Log out</a>
+							</div>
+							<script src="./mycode/js/logout.js"></script>
+						</li>
+					</ul>
+				</div>
+			</nav>
+
+			<main class="content">
+				<div class="container-fluid p-0">
+					<div class="row">
+						<div class="col-md-8 col-xl-9">
+							<div class="card" style="width: 135%;">
+								<div class="card-header">
+									<h5 class="card-title mb-0">Task Management</h5>
+								</div>
+								<div class="card-body h-100">
+
+									<h4 id="error-message" style="color: rgb(243, 72, 72);"></h4>
+
+									<h1>Task Manager</h1>
+
+									<form id="todoForm">
+										<label for="task">Task:</label>
+										<input type="text" id="task" name="task" required>
+
+										<label for="date">Deadline:</label>
+										<input type="date" id="date" name="date" required>
+
+										<label for="employee">Employee:</label>
+										<input type="text" id="employee" name="employee" required>
+
+										<button type="submit">Add Task</button>
+									</form>
+
+									<h2>Tasks</h2>
+									<table id="todoList">
+										<thead>
+											<tr style="font-size: 18px;">
+												<th>Task</th>
+												<th>Deadline</th>
+												<th>Employee</th>
+												<th>Status</th>
+												<th>Action</th>
+											</tr>
+										</thead>
+										<tbody id="todoBody"></tbody>
+									</table>
+
+									<script>
+										var tasks = [];
+
+										function renderTasks() {
+											var todoBody = document.getElementById('todoBody');
+											todoBody.innerHTML = '';
+
+											tasks.forEach(function (task, index) {
+												var row = todoBody.insertRow();
+												var taskCell = row.insertCell(0);
+												var dateCell = row.insertCell(1);
+												var employeeCell = row.insertCell(2);
+												var statusCell = row.insertCell(3);
+												var actionsCell = row.insertCell(4);
+
+												taskCell.textContent = task.Task;
+												dateCell.textContent = task.Deadline;
+												employeeCell.textContent = task.Employee;
+
+												var statusCheckbox = document.createElement('input');
+												statusCheckbox.type = 'checkbox';
+												statusCheckbox.checked = task.Status;
+												statusCheckbox.addEventListener('change', function () {
+													task.Status = statusCheckbox.checked;
+													updateTask(task);
+												});
+												statusCell.appendChild(statusCheckbox);
+
+												var deleteButton = document.createElement('button');
+												deleteButton.textContent = 'Delete';
+												deleteButton.classList.add('delete-btn');
+												deleteButton.addEventListener('click', function () {
+													deleteTask(task, index);
+												});
+												actionsCell.appendChild(deleteButton);
+											});
+										}
+
+										function fetchTasks() {
+										let companyName = localStorage.getItem('company');
+										if(companyName === null){
+											document.getElementById("error-message").innerText = "Login to manage your tasks.";
+											return;
+										}
+											let request = {
+												CompanyName: companyName,
+											}
+											fetch('http://localhost:2000/displayTasks',{
+											method: 'POST',
+											headers: {
+												'Content-Type': 'application/json'
+											},
+											body: JSON.stringify(request)
+										})
+												.then(response => response.json())
+												.then(data => {
+													tasks = data;
+													if (!data || data.length === 0) {
+												// Handle case where data is empty or undefined
+												document.getElementById("error-message").innerText = "No tasks is assigned";
+												return
+											}
+											document.getElementById("error-message").innerText = "";
+													renderTasks();
+												})
+												.catch(error => {
+													document.getElementById("error-message").innerHTML="Unable to connect to server"
+													console.error('Error fetching tasks:', error);
+												});
+										}
+
+										function addTask(taskData) {
+											fetch('http://localhost:2000/insertTask', {
+												method: 'POST',
+												headers: {
+													'Content-Type': 'application/json',
+												},
+												body: JSON.stringify(taskData),
+											})
+												.then(response => {
+													if (!response.ok) {
+														throw new Error('Failed to add task');
+													}
+													return response.json();
+												})
+												.then(data => {
+													fetchTasks();
+												})
+												.catch(error => {
+													console.error('Error adding task:', error);
+												});
+										}
+
+										function updateTask(taskData) {
+											fetch('http://localhost:2000/updateTask', {
+												method: 'POST',
+												headers: {
+													'Content-Type': 'application/json',
+												},
+												body: JSON.stringify(taskData),
+											})
+												.then(response => response.json())
+												.then(data => {
+													tasks = tasks.map(task => task.ID === data.ID ? data : task);
+													fetchTasks();
+												})
+												.catch(error => {
+													console.error('Error updating task:', error);
+												});
+										}
+
+										function deleteTask(taskData, index) {
+											fetch('http://localhost:2000/deleteTask', {
+												method: 'POST',
+												headers: {
+													'Content-Type': 'application/json',
+												},
+												body: JSON.stringify(taskData),
+											})
+												.then(response => {
+													if (response.ok) {
+														tasks.splice(index, 1);
+														renderTasks();
+													} else {
+														console.error('Error deleting task:', response.statusText);
+													}
+												})
+												.catch(error => {
+													console.error('Error deleting task:', error);
+												});
+										}
+
+										document.getElementById('todoForm').addEventListener('submit', function (event) {
+											event.preventDefault();
+
+											let companyName = localStorage.getItem('company');
+
+											var taskInput = document.getElementById('task');
+											var dateInput = document.getElementById('date');
+											var employeeInput = document.getElementById('employee');
+
+											var task = taskInput.value;
+											var date = dateInput.value;
+											var employee = employeeInput.value;
+
+											var newTask = {
+												CompanyName: companyName,
+												Task: task,
+												Deadline: date,
+												Employee: employee,
+												Status: false, // Assuming initial status is false
+											};
+
+											addTask(newTask);
+
+											// Clear form fields after adding task
+											taskInput.value = '';
+											dateInput.value = '';
+											employeeInput.value = '';
+										});
+
+										// Fetch tasks when the page loads
+										fetchTasks();
+
+									</script>
+
+
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</main>
+
+			<footer class="footer">
+				<div class="container-fluid">
+					<div class="row text-muted">
+						<div class="col-6 text-start">
+							<p class="mb-0">
+								<a class="text-muted"  target="_blank"><strong>Optimus Power</strong></a> - <a class="text-muted"  target="_blank"><strong>Powerplant Management Application</strong></a>								&copy;
+
+							</p>
+						</div>
+						<div class="col-6 text-end">
+
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
+
+	<script src="js/app.js"></script>
+
+</body>
+
+</html>

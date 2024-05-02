@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
+	<meta name="author" content="AdminKit">
+	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="shortcut icon" href="img/icons/Power_Plant_logo.jpeg" />
+
+	<link rel="canonical" href="https://demo-basic.adminkit.io/pages-blank.html" />
+
+	<title>Calculations</title>
+
+	<link href="css/app.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	<script src="./mycode/js/authorization.js"></script>
+</head>
+
+<body>
+	<div class="wrapper">
+		<nav id="sidebar" class="sidebar js-sidebar">
+			<div class="sidebar-content js-simplebar">
+				<a class="sidebar-brand" href="#">
+          <span class="align-middle">Optimus Power</span>
+        </a>
+
+				<ul class="sidebar-nav">
+
+					<li id="superadmindashboard0" class="sidebar-item">
+						<a class="sidebar-link" href="dashboard-superadmin.html">
+			  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+			</a>
+					</li>
+
+					<li id="dashboard0" class="sidebar-item">
+						<a class="sidebar-link" href="index.html">
+			  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+			</a>
+					</li>
+
+					<li id="roi0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-roi.html">
+							<i class="align-middle" data-feather="grid"></i> <span
+								class="align-middle">ROI</span>
+						</a>
+					</li>
+
+
+
+					<li id="users0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-users.html">
+							<i class="align-middle" data-feather="user"></i> <span class="align-middle">Users</span>
+						</a>
+					</li>
+
+					<li id="ipaddress0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-ipaddress.html">
+              <i class="align-middle" data-feather="map-pin"></i> <span class="align-middle">IP Address</span>
+            </a>
+					</li>
+
+					<li id="accounting0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-accounting.html">
+							<i class="align-middle" data-feather="layers"></i> <span
+								class="align-middle">Accounting</span>
+						</a>
+					</li>
+
+					<li id="transactions0" class="sidebar-item">
+						<a class="sidebar-link" href="../accounting/accounting.html">
+							<i class="align-middle" data-feather="dollar-sign"></i> <span
+								class="align-middle">Transactions</span>
+						</a>
+					</li>
+					
+					<li id="tasks0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-tasks.html">
+              <i class="align-middle" data-feather="crosshair"></i> <span class="align-middle">Tasks</span>
+            </a>
+					</li>
+
+					<li id="inventory0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-inventory.html">
+              <i class="align-middle" data-feather="box"></i> <span class="align-middle">Inventory</span>
+            </a>
+					</li>
+
+					<li id="purchase0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-purchase.html">
+              <i class="align-middle" data-feather="download"></i> <span class="align-middle">Purchase</span>
+            </a>
+					</li>
+
+
+					<li id="livedata0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-livedata.html">
+              <i class="align-middle" data-feather="activity"></i> <span class="align-middle">Live Data</span>
+            </a>
+					</li>
+
+					<li id="sensors0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-sensors.html">
+              <i class="align-middle" data-feather="compass"></i> <span class="align-middle">Sensors</span>
+            </a>
+					</li>
+
+					<li id="calculator0" class="sidebar-item active">
+						<a class="sidebar-link" href="pages-calculations.html">
+              <i class="align-middle" data-feather="grid"></i> <span class="align-middle">Calculator</span>
+            </a>
+					</li>
+
+					
+				</ul>
+
+			</div>
+		</nav>
+
+		<div class="main">
+			<nav class="navbar navbar-expand navbar-light navbar-bg">
+				<a class="sidebar-toggle js-sidebar-toggle">
+          <i class="hamburger align-self-center"></i>
+        </a>
+
+				<div class="navbar-collapse collapse">
+					<ul class="navbar-nav navbar-align">
+						<li class="nav-item dropdown">
+							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
+                <i class="align-middle" data-feather="settings"></i>
+              </a>
+
+			  <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#"
+			  data-bs-toggle="dropdown">
+			  <img src="img/avatars/avatar.png" class="avatar img-fluid rounded me-1"
+				  alt="Admin" /> <span id="adminName" class="text-dark"></span>
+		  </a>
+		  <script>
+			  document.addEventListener( 'DOMContentLoaded', function (){
+				  let username = localStorage.getItem('username')
+				  if (username === null){
+				  document.getElementById("adminName").innerHTML = "Not Logged In";
+				  window.location.href = "../Notloggedin/notLoggedin.html"
+				  return;
+				  }
+				  document.getElementById("adminName").innerHTML = username;
+				  
+			  })
+		  </script>
+			  <div class="dropdown-menu dropdown-menu-end" style="min-width: 10px;border-radius: 10px;margin-right: 2%;">
+				<a class="dropdown-item" href="#" onclick="logout()" style="color: red;">Log out</a>
+			</div>
+			<script src="./mycode/js/logout.js"></script>
+						</li>
+					</ul>
+				</div>
+			</nav>
+
+			<main class="content">
+				<div class="container-fluid p-0">
+
+					<h1 class="h3 mb-3">Calculations</h1>
+
+					<div class="row">
+						<div class="col-xl-6 col-xxl-5 d-flex" style="width: 100%;">
+							
+
+							<div class="card">
+								<div class="card-body">
+									<div class="row">
+										<div class="col mt-0">
+											<h5 class="card-title">Wind Turbine Power Output</h5>
+										</div>
+										<div class="mb-3">
+											<label class="form-label">Coefficient of  Performance (C<sub>p</sub>) in % </label>
+											<input id="coefficientOfPerformance" class="form-control form-control-lg" type="number" name="number" placeholder="Enter Coefficient of  Performance">
+										</div>
+										<div class="mb-3">
+											<label class="form-label">Air density (in kg/m3) </label>
+											<input id="airDensity" class="form-control form-control-lg" type="number" name="number" placeholder="Enter air density">
+										</div>
+										<div class="mb-3">
+											<label class="form-label">Blade length (in meters) </label>
+											<input id="bladeLength" class="form-control form-control-lg" type="number" name="number" placeholder="Enter blade length">
+										</div>
+										<div class="mb-3">
+											<label class="form-label">Wind Speed (in m/s) </label>
+											<input id="windSpeed" class="form-control form-control-lg" type="number" name="number" placeholder="Enter wind speed">
+										</div>
+										<div>
+											<br>
+											<h4 id="windTurbinePowerOutput" ></h4>
+										</div>
+										<div class="d-grid gap-2 mt-3">
+											<div class="d-grid gap-2 mt-3">
+												<button class="btn btn-lg btn-primary" onclick="findWindTurbinePowerOutput()">Calculate</button>
+											</div>
+										</div>
+										<script>
+											function findWindTurbinePowerOutput(){
+												let coefficientOfPerformance = document.getElementById('coefficientOfPerformance').value;
+												let airDensity = document.getElementById('airDensity').value;
+												let bladeLength = document.getElementById('bladeLength').value;
+												let windSpeed = document.getElementById('windSpeed').value;
+												document.getElementById('windTurbinePowerOutput').innerText = "Power (in Watts): " + ( 0.5 * coefficientOfPerformance * airDensity * 3.14 * (bladeLength*bladeLength) * (windSpeed*windSpeed*windSpeed) );
+											}
+										</script>
+									</div>
+								</div>
+							</div>
+
+							<div class="card" style="margin-left: 15px;">
+								<div class="card-body">
+									<div class="row">
+										<div class="col mt-0">
+											<h5 class="card-title">Boiler efficiency</h5>
+										</div>
+										<div class="mb-3">
+											<label class="form-label">Mass of steam flow </label>
+											<input id="massOfSteamFlow" class="form-control form-control-lg" type="number" name="number" placeholder="Enter mass of steam flow">
+										</div>
+										<div class="mb-3">
+											<label class="form-label">Steam enthalpy feed water flow at economizer inlet </label>
+											<input id="feedWaterFlowAtEconomizer" class="form-control form-control-lg" type="number" name="number" placeholder="Enter steam enthalpy feed water flow at economizer inlet">
+										</div>
+										<div class="mb-3">
+											<label class="form-label">Steam enthalpy attemperator water flow </label>
+											<input id="attemperatorWaterFlow" class="form-control form-control-lg" type="number" name="number" placeholder="Enter steam enthalpy attemperator water flow">
+										</div>
+										<div class="mb-3">
+											<label class="form-label">GCV of fuel </label>
+											<input id="GCVOfFuel" class="form-control form-control-lg" type="number" name="number" placeholder="Enter GCV of fuel">
+										</div>
+										<div class="mb-3">
+											<label class="form-label">Fuel Consumption </label>
+											<input id="fuelConsumption" class="form-control form-control-lg" type="number" name="number" placeholder="Enter Fuel Consumption">
+										</div>
+										<div>
+											<br>
+											<h4 id="boilerEfficiency" ></h4>
+										</div>
+										<div class="d-grid gap-2 mt-3">
+											<div class="d-grid gap-2 mt-3">
+												<button class="btn btn-lg btn-primary" onclick="findBoilerEfficiency()">Calculate</button>
+											</div>
+										</div>
+										<script>
+											function findBoilerEfficiency(){
+												let massOfSteamFlow = document.getElementById('massOfSteamFlow').value;
+												let feedWaterFlowAtEconomizer = document.getElementById('feedWaterFlowAtEconomizer').value;
+												let attemperatorWaterFlow = document.getElementById('attemperatorWaterFlow').value;
+												let GCVOfFuel = document.getElementById('GCVOfFuel').value;
+												let fuelConsumption = document.getElementById('fuelConsumption').value;
+												let enthalpy = 2800;
+												document.getElementById('boilerEfficiency').innerText = "Boiler efficiency : " + (( massOfSteamFlow * feedWaterFlowAtEconomizer * (attemperatorWaterFlow * enthalpy)) / (GCVOfFuel * fuelConsumption) );
+											}
+										</script>
+									</div>
+								</div>
+							</div>
+
+							
+
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-xl-6 col-xxl-5 d-flex" style="width: 100%;">
+							
+
+							<div class="card">
+								<div class="card-body">
+									<div class="row">
+										<div class="col mt-0">
+											<h5 class="card-title">Air requirement for combustion</h5>
+										</div>
+										<div class="mb-3">
+											<label class="form-label">Percentage of carbon in fuel </label>
+											<input id="percentageOfCarbonInFuel" class="form-control form-control-lg" type="number" name="number" placeholder="Enter the percentage of carbon in fuel">
+										</div>
+										<div class="mb-3">
+											<label class="form-label">Percentage of hydrogen in fuel </label>
+											<input id="percentageOfHydrogenInFuel" class="form-control form-control-lg" type="number" name="number" placeholder="Enter the percentage of hydrogen in fuel">
+										</div>
+										<div class="mb-3">
+											<label class="form-label">Percentage of sulphur in fuel </label>
+											<input id="percentageOfSulphurInFuel" class="form-control form-control-lg" type="number" name="number" placeholder="Enter the percentage of sulphur in fuel">
+										</div>
+										<div>
+											<br>
+											<h4 id="airRequiredForCombustion" ></h4>
+										</div>
+										<div class="d-grid gap-2 mt-3">
+											<div class="d-grid gap-2 mt-3">
+												<button class="btn btn-lg btn-primary" onclick="findAirRequirementForCombustion()">Calculate</button>
+											</div>
+										</div>
+										<script>
+											function findAirRequirementForCombustion(){
+												let percentageOfCarbonInFuel = document.getElementById('percentageOfCarbonInFuel').value;
+												let percentageOfHydrogenInFuel = document.getElementById('percentageOfHydrogenInFuel').value;
+												let percentageOfSulphurInFuel = document.getElementById('percentageOfSulphurInFuel').value;
+												document.getElementById('airRequiredForCombustion').innerText = "Air Required in % : " + ( ( (11.6 * percentageOfCarbonInFuel) + ((34.8 * percentageOfHydrogenInFuel)) + (4.35 * percentageOfSulphurInFuel))/100 );
+											}
+										</script>
+									</div>
+								</div>
+							</div>
+
+							<div class="card" style="margin-left: 15px;">
+								<div class="card-body">
+									<div class="row">
+										<div class="col mt-0">
+											<h5 class="card-title">Heat loss due to moisture in fuel</h5>
+										</div>
+										<div class="mb-3">
+											<label class="form-label">Moisture in fuel </label>
+											<input id="moistureInTheFuel" class="form-control form-control-lg" type="number" name="number" placeholder="Enter the moisture in fuel">
+										</div>
+										<div class="mb-3">
+											<label class="form-label">Specific heat of flue gas (C<sub>p</sub>) in (kcal/kg) </label>
+											<input id="specificHeatOfFlueGas" class="form-control form-control-lg" type="number" name="number" placeholder="Enter Specific heat of flue gas">
+										</div>
+										<div class="mb-3">
+											<label class="form-label">Temperature of flue gas </label>
+											<input id="temperatureOfFlueGas" class="form-control form-control-lg" type="number" name="number" placeholder="Enter temperature of flue gas">
+										</div>
+										<div class="mb-3">
+											<label class="form-label">Ambient air temperature </label>
+											<input id="ambientAirTemperature" class="form-control form-control-lg" type="number" name="number" placeholder="Enter ambient air temperature">
+										</div>
+										<div class="mb-3">
+											<label class="form-label">GCV of fuel </label>
+											<input id="GCVOfFuel2" class="form-control form-control-lg" type="number" name="number" placeholder="Enter GCV of fuel">
+										</div>
+										<div>
+											<br>
+											<h4 id="heatLossDueToMoisture" ></h4>
+										</div>
+										<div class="d-grid gap-2 mt-3">
+											<div class="d-grid gap-2 mt-3">
+												<button class="btn btn-lg btn-primary" onclick="findHeatLossDueToMoisture()">Calculate</button>
+											</div>
+										</div>
+										<script>
+											function findHeatLossDueToMoisture(){
+												let moistureInTheFuel = document.getElementById('moistureInTheFuel').value;
+												let specificHeatOfFlueGas = document.getElementById('specificHeatOfFlueGas').value;
+												let temperatureOfFlueGas = document.getElementById('temperatureOfFlueGas').value;
+												let GCVOfFuel2 = document.getElementById('GCVOfFuel2').value;
+												let ambientAirTemperature = document.getElementById('ambientAirTemperature').value;
+												let enthalpy = 2800;
+												document.getElementById('heatLossDueToMoisture').innerText = "Heat Loss in % : " + ( (moistureInTheFuel * (584 + specificHeatOfFlueGas * (temperatureOfFlueGas - ambientAirTemperature)*100))/GCVOfFuel2 );
+											}
+										</script>
+									</div>
+								</div>
+							</div>
+
+							<div class="card" style="margin-left: 15px;">
+								<div class="card-body">
+									<div class="row">
+										<div class="col mt-0">
+											<h5 class="card-title">Steam velocity in line</h5>
+										</div>
+										<div class="mb-3">
+											<label class="form-label">Steam flow in (kg/hr) </label>
+											<input id="steamFlow" class="form-control form-control-lg" type="number" name="number" placeholder="Enter the steam flow">
+										</div>
+										<div class="mb-3">
+											<label class="form-label">Internal diameter of steam pipe </label>
+											<input id="internalDiameterOfSteamPipe" class="form-control form-control-lg" type="number" name="number" placeholder="Enter internal diameter of steam pipe">
+										</div>
+										<div>
+											<br>
+											<h4 id="steamVelocityInLine" ></h4>
+										</div>
+										<div class="d-grid gap-2 mt-3">
+											<div class="d-grid gap-2 mt-3">
+												<button class="btn btn-lg btn-primary" onclick="findSteamVelocityInLine()">Calculate</button>
+											</div>
+										</div>
+										<script>
+											function findSteamVelocityInLine(){
+												let steamFlowInPipelin = document.getElementById('steamFlow').value;
+												let internalDiameterOfSteamPipe = document.getElementById('internalDiameterOfSteamPipe').value;
+												let steamFlow = ((steamFlowInPipelin/0.6)*3600)
+												let areaOfPipeline = ((3.14 * (internalDiameterOfSteamPipe * internalDiameterOfSteamPipe))/4)
+												document.getElementById('steamVelocityInLine').innerText = "Steam flow in pipe in (m/s) : " + steamflow/areaOfPipeline;
+											}
+										</script>
+									</div>
+								</div>
+							</div>
+							
+
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-xl-6 col-xxl-5 d-flex" style="width: 100%;">
+							
+
+							<div class="card">
+								<div class="card-body">
+									<div class="row">
+										<div class="col mt-0">
+											<h5 class="card-title">Amount of heat required to <br> raise the water temperature</h5>
+										</div>
+										<div class="mb-3">
+											<label class="form-label">Mass of water </label>
+											<input id="massOfWater" class="form-control form-control-lg" type="number" name="number" placeholder="Enter mass of water">
+										</div>
+										<div class="mb-3">
+											<label class="form-label">Initial temperature of water (in deg C) </label>
+											<input id="initialTemperatureOfWater" class="form-control form-control-lg" type="number" name="number" placeholder="Enter initial temperature of water">
+										</div>
+										<div class="mb-3">
+											<label class="form-label">Final temperature of water (in deg C) </label>
+											<input id="finalTemperatureOfWater" class="form-control form-control-lg" type="number" name="number" placeholder="Enter final temperature of water">
+										</div>
+										<div>
+											<br>
+											<h4 id="amountOfHeatRequiredToRaiseWaterTemperature" ></h4>
+										</div>
+										<div class="d-grid gap-2 mt-3">
+											<div class="d-grid gap-2 mt-3">
+												<button class="btn btn-lg btn-primary" onclick="findHeatRequiredToRaiseWaterTemperature()">Calculate</button>
+											</div>
+										</div>
+										<script>
+											function findHeatRequiredToRaiseWaterTemperature(){
+												let massOfWater = document.getElementById('massOfWater').value;
+												let initialTemperatureOfWater = document.getElementById('initialTemperatureOfWater').value;
+												let finalTemperatureOfWater = document.getElementById('finalTemperatureOfWater').value;
+												document.getElementById('amountOfHeatRequiredToRaiseWaterTemperature').innerText = "Heat required (in kcal/kg): " + ( massOfWater * 4.186 * (finalTemperatureOfWater - initialTemperatureOfWater) );
+											}
+										</script>
+									</div>
+								</div>
+							</div>
+
+							<div class="card" style="margin-left: 15px;">
+								<div class="card-body">
+									<div class="row">
+										<div class="col mt-0">
+											<h5 class="card-title">Steam Condenser Efficiency Calculation</h5>
+										</div>
+										<div class="mb-3">
+											<label class="form-label">Condenser Inlet Cooling Water Temperature</label>
+											<input id="condenserInletCoolingWaterTemperature" class="form-control form-control-lg" type="number" placeholder="Enter condenser inlet cooling water temperature">
+										</div>
+										<div class="mb-3">
+											<label class="form-label">Condenser Outlet Cooling Water Temperature</label>
+											<input id="condenserOutletCoolingWaterTemperature" class="form-control form-control-lg" type="number" placeholder="Enter condenser outlet cooling water temperature">
+										</div>
+										<div class="mb-3">
+											<label class="form-label">Temperature Corresponding to the Vacuum</label>
+											<input id="temperatureCorrespondingToTheVacuum" class="form-control form-control-lg" type="number" placeholder="Enter temperature corresponding to the vacuum">
+										</div>
+										<div>
+											<h4 id="steamCondenserEfficiency"></h4>
+										</div>
+										<div class="d-grid gap-2 mt-3">
+											<button class="btn btn-lg btn-primary" onclick="calculateSteamCondenserEfficiency()">Calculate</button>
+										</div>
+										<script>
+											function calculateSteamCondenserEfficiency() {
+												let condenserInletTemp = parseFloat(document.getElementById('condenserInletCoolingWaterTemperature').value);
+												let condenserOutletTemp = parseFloat(document.getElementById('condenserOutletCoolingWaterTemperature').value);
+												let vacuumTemp = parseFloat(document.getElementById('temperatureCorrespondingToTheVacuum').value);
+										
+												if (isNaN(condenserInletTemp) || isNaN(condenserOutletTemp) || isNaN(vacuumTemp)) {
+													document.getElementById('steamCondenserEfficiency').innerText = "Please enter valid temperatures.";
+													return;
+												}
+										
+												let efficiency = ((condenserOutletTemp - condenserInletTemp) * 100) / (vacuumTemp - condenserInletTemp);
+												document.getElementById('steamCondenserEfficiency').innerText = "Condenser efficiency: " + efficiency.toFixed(2) + "%";
+											}
+										</script>
+									</div>
+								</div>
+							</div>
+							
+
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-xl-6 col-xxl-5 d-flex" style="width: 100%;">
+							
+
+							<div class="card" style="margin-left: 15px;">
+								<div class="card-body">
+									<div class="row">
+										<div class="col mt-0">
+											<h5 class="card-title"> Power generation in steam Turbine</h5>
+										</div>
+										<div class="mb-3">
+											<label class="form-label">Turbine inlet steam flow  (in TPH)</label>
+											<input id="turbineInletSteamFlow" class="form-control form-control-lg" type="number" placeholder="Enter turbine inlet steam flow">
+										</div>
+										<div class="mb-3">
+											<label class="form-label">Inlet steam enthalpy (in kcal/kg)</label>
+											<input id="inletSteamEnthalpy" class="form-control form-control-lg" type="number" placeholder="Enter inlet Steam Enthalpy">
+										</div>
+										<div class="mb-3">
+											<label class="form-label">Exhaust steam enthalpy (in kcal/kg)</label>
+											<input id="exhaustSteamEnthalpy" class="form-control form-control-lg" type="number" placeholder="Enter exhaust steam enthalpy">
+										</div>
+										<div>
+											<h4 id="powerGenerationInSteamTurbine"></h4>
+										</div>
+										<div class="d-grid gap-2 mt-3">
+											<button class="btn btn-lg btn-primary" onclick="calculatePowerGenerationInSteamTurbine()">Calculate</button>
+										</div>
+										<script>
+											function calculatePowerGenerationInSteamTurbine() {
+												let turbineInletSteamFlow = parseFloat(document.getElementById('turbineInletSteamFlow').value);
+												let inletSteamEnthalpy = parseFloat(document.getElementById('inletSteamEnthalpy').value);
+												let exhaustSteamEnthalpy = parseFloat(document.getElementById('exhaustSteamEnthalpy').value);
+										
+												document.getElementById('powerGenerationInSteamTurbine').innerText = "Power in MV: " + ((turbineInletSteamFlow * (inletSteamEnthalpy * exhaustSteamEnthalpy))/860);
+											}
+										</script>
+									</div>
+								</div>
+							</div>
+
+							<div class="card" style="margin-left: 15px;">
+								<div class="card-body">
+									<div class="row">
+										<div class="col mt-0">
+											<h5 class="card-title">Power output in hydro power plant</h5>
+										</div>
+										<div class="mb-3">
+											<label class="form-label">Gross head (in ft)<br> (including the head loss in the penstock) </label>
+											<input id="grossHead" class="form-control form-control-lg" type="number" name="number" placeholder="Enter the gross head">
+										</div>
+										<div class="mb-3">
+											<label class="form-label"> flow of water (in gal/min) </label>
+											<input id="flowOfWater" class="form-control form-control-lg" type="number" name="number" placeholder="Enter the flow of water">
+										</div>
+										<div>
+											<br>
+											<h4 id="powerOutputInHydroPowerPlant" ></h4>
+										</div>
+										<div class="d-grid gap-2 mt-3">
+											<div class="d-grid gap-2 mt-3">
+												<button class="btn btn-lg btn-primary" onclick="findHeatLossDueToMoisture()">Calculate</button>
+											</div>
+										</div>
+										<script>
+											function findHeatLossDueToMoisture(){
+												let grossHead = document.getElementById('grossHead').value;
+												let flowOfWater = document.getElementById('flowOfWater').value;
+												document.getElementById('powerOutputInHydroPowerPlant').innerText = "Power in Watts : " + ((grossHead * flowOfWater)/10);
+											}
+										</script>
+									</div>
+								</div>
+							</div>
+
+							<div class="card" style="margin-left: 15px;">
+								<div class="card-body">
+									<div class="row">
+										<div class="col mt-0">
+											<h5 class="card-title">Water Flow in Penstock & Velocity Calculation</h5>
+										</div>
+										<div class="mb-3">
+											<label class="form-label">Cross-sectional Area of Penstock (m²)</label>
+											<input id="penstockArea" class="form-control form-control-lg" type="number" placeholder="Enter area of penstock">
+										</div>
+										<div class="mb-3">
+											<label class="form-label">Select Input Type:</label>
+											<select id="inputTypeSelect" class="form-select form-select-lg" onchange="toggleInputField()">
+												<option value="" selected disabled>Select Input Type</option>
+												<option value="flowRate">Flow Rate (m³/s)</option>
+												<option value="velocity">Velocity (m/s)</option>
+											</select>
+										</div>
+										<div id="flowRateInputField" style="display: none;" class="mb-3">
+											<label class="form-label">Flow Rate (m³/s)</label>
+											<input id="flowRateInput" class="form-control form-control-lg" type="number" placeholder="Enter flow rate">
+										</div>
+										<div id="velocityInputField" style="display: none;" class="mb-3">
+											<label class="form-label">Velocity (m/s)</label>
+											<input id="velocityInput" class="form-control form-control-lg" type="number" placeholder="Enter velocity">
+										</div>
+										<div id="outputField" class="mb-3" style="display:none;">
+										     <br>
+											<h4 id="result"></h4>
+										</div>
+										<div class="d-grid gap-2 mt-3">
+											<button class="btn btn-lg btn-primary" onclick="calculate()">Calculate</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							
+
+							<script>
+								function toggleInputField() {
+    let inputType = document.getElementById('inputTypeSelect').value;
+    if (inputType === 'flowRate') {
+        document.getElementById('flowRateInputField').style.display = 'block';
+        document.getElementById('velocityInputField').style.display = 'none';
+		document.getElementById('flowRateInput').value = "";
+        document.getElementById('velocityInput').value = "";
+    } else if (inputType === 'velocity') {
+        document.getElementById('flowRateInputField').style.display = 'none';
+        document.getElementById('velocityInputField').style.display = 'block';
+		document.getElementById('flowRateInput').value = "";
+        document.getElementById('velocityInput').value = "";
+    }
+    document.getElementById('outputField').style.display = 'none'; // Hide output when input changes
+}
+
+function calculate() {
+    let penstockArea = parseFloat(document.getElementById('penstockArea').value);
+    let flowRate = parseFloat(document.getElementById('flowRateInput').value);
+    let velocity = parseFloat(document.getElementById('velocityInput').value);
+
+    if (isNaN(penstockArea)) {
+        alert("Please enter the cross-sectional area of the penstock.");
+        return;
+    }
+	console.log(flowRate)
+	console.log(velocity)
+
+    if (!flowRate && !velocity ) {
+        alert("Please enter either the flow rate or the velocity.");
+        return;
+    }
+
+    if (flowRate) {
+        velocity = flowRate / penstockArea;
+        document.getElementById('result').innerHTML = "Velocity: " + velocity.toFixed(2) + " m/s";
+    } else if (velocity) {
+        flowRate = penstockArea * velocity;
+        document.getElementById('result').innerHTML = "Flow Rate: " + flowRate.toFixed(2) + " m³/s";
+    }
+    document.getElementById('outputField').style.display = 'block'; // Display output after calculation
+}
+
+							</script>
+							
+
+							
+							
+							
+
+						</div>
+					</div>
+
+				</div>
+			</main>
+
+			<footer class="footer">
+				<div class="container-fluid">
+					<div class="row text-muted">
+						<div class="col-6 text-start">
+							<p class="mb-0">
+								<a class="text-muted"  target="_blank"><strong>Optimus Power</strong></a> - <a class="text-muted"  target="_blank"><strong>Powerplant Management Application</strong></a>								&copy;
+							</p>
+						</div>
+						
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
+
+	<script src="js/app.js"></script>
+
+</body>
+
+</html>

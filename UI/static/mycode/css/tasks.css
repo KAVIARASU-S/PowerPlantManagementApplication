@@ -1,0 +1,68 @@
+h1, h2, h3 {
+    color: #333;
+    text-align: center;
+  }
+  form {
+    margin-bottom: 20px;
+  }
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  input[type="text"],
+  input[type="date"] {
+    width: calc(100% - 12px);
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+  }
+  input[type="checkbox"] {
+    margin-right: 5px;
+    margin-left: 10%;
+  }
+  button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px; /* Rounded corners */
+    transition: background-color 0.3s ease;
+  }
+  button:hover {
+    background-color: #45a049;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 8px; /* Rounded corners for the table */
+    overflow: hidden; /* Hide overflow content to prevent sharp corners */
+  }
+  th, td {
+    border-bottom: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  th {
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+  }
+  tr:hover {
+    background-color: #f1f1f1;
+  }
+  .delete-btn {
+    background-color: #f44336;
+  }
+  .delete-btn:hover {
+    background-color: #cc0000;
+  }
+  .edit-btn {
+    background-color: #007bff;
+  }
+  .edit-btn:hover {
+    background-color: #0056b3;
+  }
+  .completed-task {
+    background-color: #d4edda;
+  }

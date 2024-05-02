@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="../static/img/icons/Power_Plant_logo.jpeg">
+<title>Transactions</title>
+<style>
+Body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+  }
+  .tabs {
+    width: 74%; /* Set the width to match the form container */
+    max-width: 93%; /* Set the maximum width to match the form container */
+    margin: 0 auto; /* Center the tabs horizontally */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 20px; /* Added margin for spacing */
+    border-radius: 10px; /* Rounded corners for the tabs */
+  }
+  .tab {
+    position: relative;
+    padding: 15px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .tab:hover {
+    background-color: #f2f2f2;
+  }
+  .tab.active {
+    font-weight: bold;
+    color: blue;
+  }
+  .indicator {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background-color: blue;
+    transition: width 0.3s ease, transform 0.3s ease;
+  }
+  .accountingContent {
+    width: 93%; /* Set the width to match the form container */
+  max-width: 100%; /* Set the maximum width to match the form container */
+  margin: 0 auto;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-radius: 0 0 5px 5px;
+    position: relative;
+  }
+  .tabContent {
+    position: absolute;
+    text-align: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    transform: rotateY(90deg); /* Initial rotation */
+    transition: opacity 0.5s ease, transform 1.5s ease; /* Transition for content */
+  }
+  .tabContent.active {
+    opacity: 1;
+    transform: rotateY(0deg); /* Rotate back to 0 degrees */
+  }
+
+  /* Styles for form */
+  .form-container {
+    max-width: 40%; /* Set the maximum width to 90% of the viewport width */
+    margin: 20px auto; /* Center the form horizontally */
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-radius: 10px; /* Rounded corners for the form */
+    padding: 20px;
+  }
+
+  .form-container h2 {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .form-container input[type="text"],
+  .form-container input[type="number"],
+  .form-container input[type="date"],
+  .form-container button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+  }
+  /* Style for date input */
+.form-container input:focus {
+  outline: none;
+  border-color: blue; /* Change the border color when focused */
+}
+
+/* Style the select element when it's hovered */
+.form-container input:hover {
+  border-color: green; /* Change the border color when hovered */
+}
+
+  .form-container button {
+    background-color: blue;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .form-container button:hover {
+    background-color: darkblue;
+  }
+  /* General table styles */
+ /* General table styles */
+table {
+    background-color: #fbf8f8;
+    margin-left: auto;
+    margin-right: auto;
+  width: 80%;
+  border-collapse: collapse;
+  margin-bottom: 20px; /* Added margin for spacing */
+  border-radius: 8px; /* Rounded corners */
+  overflow: hidden; /* Hide overflowing content */
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 15px; /* Increase padding for better spacing */
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+  font-weight: bold; /* Bold header text */
+  text-align: center;
+}
+table tr:hover {
+  background-color: #f0f0f0; /* Change background color when hovering */
+}
+
+select {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+/* Style the options inside the select element */
+option {
+  padding: 10px;
+  font-size: 16px;
+}
+
+/* Style the select element when focused */
+select:focus {
+  outline: none;
+  border-color: blue; /* Change the border color when focused */
+}
+
+/* Style the select element when it's hovered */
+select:hover {
+  border-color: green; /* Change the border color when hovered */
+}
+
+/* Style the select element when it's disabled */
+select:disabled {
+  background-color: #f2f2f2; /* Change the background color when disabled */
+  color: #999; /* Change the text color when disabled */
+}
+
+
+</style>
+</head>
+<body class="accountingBody">
+
+<h4 id="error-message" style="color: rgb(243, 72, 72); text-align: center;"></h4>
+
+<div class="form-container">
+  <h2>Add new transaction to accounts</h2>
+  <div>
+    <input type="number" id="amount" placeholder="Amount" required>
+  </div>
+  <div>
+    <input
+    placeholder="Transaction Date"
+    class="textbox-n"
+    type="text"
+    onfocus="(this.type='date')"
+    onblur="(this.type='text')"
+    id="transactionDate" required>
+</div>
+  <div>
+    <select id="transactionType" name="transactionType" required aria-label="Transaction Type">
+        <option value="" disabled selected>Select Transaction Type</option>
+        <option value="Income">Income</option>
+        <option value="Expense">Expense</option>
+    </select>
+</div>
+  <div>
+    <input type="text" id="description" placeholder="Description" required>
+  </div>
+  <div>
+    <button onclick="addTransaction();">Add transaction</button>
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="openTab(0,'')">All</div>
+  <div class="tab" onclick="openTab(1,'Income')">Income</div>
+  <div class="tab" onclick="openTab(2,'Expense')">Expense</div>
+  <div class="indicator"></div>
+</div>
+
+<div class="accountingContent">
+  <div id="tabContent1" class="tabContent active">
+    <table id="accountingTable">
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Transaction Type</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody id="todoBody"></tbody>
+      </table>
+  </div>
+  
+  <div id="tabContent2" class="tabContent">
+    <table id="accountingTable">
+        <thead>
+        <tr>
+          <th>Date</th>
+          <th>Amount</th>
+          <th>Income</th>
+          <th>Description</th>
+          </tr>
+          </thead>
+          <tbody id="todoBody"></tbody>
+        </table>
+    </div>
+    <div id="tabContent3" class="tabContent">
+      <table id="accountingTable">
+          <thead>
+          <tr>
+          <th>Date</th>
+          <th>Amount</th>
+          <th>Expense</th>
+          <th>Description</th>
+          </tr>
+          </thead>
+          <tbody id="todoBody"></tbody>
+        </table>
+    </div>
+  </div>
+  
+  <script>
+    // Call openTab() function with index 0 to set the indicator initially at Tab 1
+    let filter;
+
+    openTab(0,"");
+
+    function openTab(tabIndex,filterdata) {
+        filter = filterdata;
+
+      var tabs = document.querySelectorAll('.tab');
+      var tabContents = document.querySelectorAll('.tabContent');
+      var indicator = document.querySelector('.indicator');
+      
+  
+      tabs.forEach(function(tab, index) {
+        if (index === tabIndex) {
+          tab.classList.add('active');
+          tabContents[index].classList.add('active');
+        } else {
+          tab.classList.remove('active');
+          tabContents[index].classList.remove('active');
+        }
+      });
+  
+      var activeTab = document.querySelector('.tab.active');
+      indicator.style.width = activeTab.offsetWidth + 'px';
+      indicator.style.transform = 'translateX(' + activeTab.offsetLeft + 'px)';
+      displayAccounting();
+    }
+
+    function displayAccounting() {
+      let companyName = localStorage.getItem('company');
+      if (companyName === null){
+        document.getElementById("error-message").innerText = "Login to view your transactions.";
+				window.location.href = "../Notloggedin/notLoggedin.html"
+        return;
+      }
+      searchFilter = {
+        CompanyName:companyName,
+      }
+    fetch('http://localhost:2000/displayTransactions',{
+											method: 'POST',
+											headers: {
+												'Content-Type': 'application/json'
+											},
+											body: JSON.stringify(searchFilter)
+										})
+        .then(response => {
+            if (!response.ok) {
+                document.getElementById("error-message").innerText = "Unable to connect to server"
+                throw new Error('Unable to connect to server');
+            }
+            return response.json();
+        })
+        .then(data => {
+          if (data === null){
+            document.getElementById("error-message").innerText = "No transactions done";
+            return
+          }
+            var todoBody = document.querySelector('.tabContent.active tbody');
+            todoBody.innerHTML = "";
+            if (!data || data.length === 0) {
+                // Handle case where data is empty or undefined
+                document.getElementById("error-message").innerText = "No transaction done";
+            }
+
+            data.forEach(transaction => {
+                if (!transaction) {
+                    // Handle case where item is null
+                    console.error('Invalid item data:', transaction);
+                    return; // Exit loop
+                }
+                let newDate = new Date(transaction.Date)
+                let formattedDate = newDate.toLocaleDateString('en-GB')
+                let color
+                if (transaction.TransactionType == "Income"){
+                    color ="green"
+                }
+                if (transaction.TransactionType == "Expense"){
+                    color ="red"
+                }
+                
+
+                var row = document.createElement("tr");
+                row.innerHTML = `
+                    <td style="text-align: center;">${formattedDate}</td>
+                    <td style="text-align: center;">${transaction.Amount}</td>
+                    <td style="text-align: center;color: ${color}">${transaction.TransactionType}</td>
+                    <td style="text-align: center;">${transaction.Description}</td>
+                    `;
+
+                    console.log(filter)
+                    if (filter !== ""){
+                    if (filter === transaction.TransactionType){
+                todoBody.appendChild(row);   
+                    }
+                }else{
+                todoBody.appendChild(row);
+                }
+            });
+        })
+        .catch(error => {
+            document.getElementById("error-message").innerText = "Unable to connect to server"
+            console.error('Error:', error);
+        });
+} 
+function addTransaction() {
+    let companyName = localStorage.getItem('company');
+    var amount = parseInt(document.getElementById("amount").value);
+		
+		var transactionDate = document.getElementById("transactionDate").value;
+		var transactionType = document.getElementById("transactionType").value;
+        var description = document.getElementById("description").value;
+
+										
+										  // Validate input fields
+										  if ( transactionDate.trim() === '' || transactionType.trim() === '') {
+											// Display error message if any field is empty
+											document.getElementById("error-message").innerText = "Please fill out all fields";
+											return;
+										}
+									
+									
+										// Validate amount
+										if (isNaN(amount) || amount <= 0) {
+											// Display error message if amount is not a valid number or less than or equal to zero
+											document.getElementById("error-message").innerText = "Please enter valid amount";
+											return;
+										}
+									
+										if (transactionDate === "") {
+											transactionDate = null;
+										}
+                                    
+										let enteredformattedDate = new Date(transactionDate).toISOString();
+									
+										var transaction = {
+                      CompanyName:companyName,
+											Amount: amount,
+											Date: enteredformattedDate,
+											TransactionType: transactionType,
+											Description: description
+										};
+									
+										fetch('http://localhost:2000/insertTransaction', {
+											method: 'POST',
+											headers: {
+												'Content-Type': 'application/json'
+											},
+											body: JSON.stringify(transaction)
+										})
+										.then(response => response.json())
+										.then(data => {
+											if (data.Error) {
+												document.getElementById("error-message").innerText = data.Error;
+											} else {
+												// Clear input fields
+												document.getElementById("error-message").innerText = ""; // Clear error message
+												document.getElementById("amount").value = "";
+												document.getElementById("transactionDate").value = "";
+												document.getElementById("transactionType").value = "";
+												document.getElementById("description").value = "";
+									
+												// Refresh inventory display
+												displayAccounting();
+											}
+										})
+										.catch(error => {
+											console.error('Error:', error);
+										});
+									}
+  </script>
+  
+  </body>
+  </html>
+  

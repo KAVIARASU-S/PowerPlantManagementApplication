@@ -11,6 +11,7 @@ import (
 func Routes(router *gin.Engine,controller controllers.CompanyController) {
 	router.GET("/sample",controller.DisplayCompany)
 	router.POST("/sample",controller.InsertCompany)
+	router.Static("/OptimusPower","./UI/login")
 }
 
 func UserRoutes (router *gin.Engine,controller controllers.UserController){
@@ -18,7 +19,7 @@ func UserRoutes (router *gin.Engine,controller controllers.UserController){
 	router.POST("/signIn",controller.ValidateUser)
 	router.POST("/insertIP",controller.InsertIP)
 	router.POST("/totp",controller.ValidateTotp)
-	router.GET("/displayUser",controller.DisplayUser)
+	router.POST("/displayUser",controller.DisplayUser)
 	router.GET("/displayIP",controller.DisplayIP)
 }
 
@@ -47,7 +48,7 @@ func SensorRoutes (router *gin.Engine,controller controllers.SensorController){
 }
 
 func AccountingRoutes (router *gin.Engine,controller controllers.AccountingController){
-	router.GET("/displayTransactions",controller.DisplayTransactions)
+	router.POST("/displayTransactions",controller.DisplayTransactions)
 	router.POST("/insertTransaction",controller.InsertTransaction)
-	router.GET("/displayAccounting",controller.DisplayAccounting)
+	router.POST("/displayAccounting",controller.DisplayAccounting)
 }

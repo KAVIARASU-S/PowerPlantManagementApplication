@@ -19,7 +19,16 @@ func InitAccountingController(acountingService interfaces.IAccounting) Accountin
 }
 
 func (controller *AccountingController) DisplayTransactions(c *gin.Context) {
-	allTransactions, err := controller.AccountingService.DisplayTransactions()
+	var searchFilter models.SearchFilter
+
+	if err := c.ShouldBindJSON(&searchFilter); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"Error": "Invalid Json format",
+		})
+		return
+	}
+
+	allTransactions, err := controller.AccountingService.DisplayTransactions(&searchFilter)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
@@ -54,7 +63,16 @@ func (controller *AccountingController) InsertTransaction(c *gin.Context) {
 }
 
 func (controller *AccountingController) DisplayAccounting(c *gin.Context){
-	allAccounts,err := controller.AccountingService.DisplayAccounting()
+	var searchFilter models.SearchFilter
+
+	if err := c.ShouldBindJSON(&searchFilter); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"Error": "Invalid Json format",
+		})
+		return
+	}
+
+	allAccounts,err := controller.AccountingService.DisplayAccounting(&searchFilter)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{

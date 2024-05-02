@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
+	<meta name="author" content="Optimus Power">
+	<meta name="keywords"
+		content="Optimus Power, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="shortcut icon" href="img/icons/Power_Plant_logo.jpeg" />
+
+	<link rel="canonical" href="https://demo-basic.Optimus Power.io/pages-profile.html" />
+
+	<title>Inventory</title>
+
+	<link href="css/app.css" rel="stylesheet">
+	<link href="mycode/css/users.css" rel="stylesheet">
+	<link href="mycode/purchase/purchase.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="./mycode/js/authorization.js"></script>
+</head>
+
+<body>
+	<div class="wrapper">
+		<nav id="sidebar" class="sidebar js-sidebar">
+			<div class="sidebar-content js-simplebar">
+				<a class="sidebar-brand" href="#">
+					<span class="align-middle">Optimus Power</span>
+				</a>
+
+				<ul class="sidebar-nav">
+
+
+					<li id="superadmindashboard0" class="sidebar-item">
+						<a class="sidebar-link" href="dashboard-superadmin.html">
+			  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+			</a>
+					</li>
+
+					<li id="dashboard0" class="sidebar-item">
+						<a class="sidebar-link" href="index.html">
+							<i class="align-middle" data-feather="sliders"></i> <span
+								class="align-middle">Dashboard</span>
+						</a>
+					</li>
+
+					<li id="roi0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-roi.html">
+							<i class="align-middle" data-feather="grid"></i> <span class="align-middle">ROI</span>
+						</a>
+					</li>
+
+
+
+					<li id="users0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-users.html">
+							<i class="align-middle" data-feather="user"></i> <span class="align-middle">Users</span>
+						</a>
+					</li>
+
+					<li id="ipaddress0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-ipaddress.html">
+							<i class="align-middle" data-feather="map-pin"></i> <span class="align-middle">IP
+								Address</span>
+						</a>
+					</li>
+
+					<li id="accounting0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-accounting.html">
+							<i class="align-middle" data-feather="layers"></i> <span
+								class="align-middle">Accounting</span>
+						</a>
+					</li>
+
+					<li id="transactions0" class="sidebar-item">
+						<a class="sidebar-link" href="../accounting/accounting.html">
+							<i class="align-middle" data-feather="dollar-sign"></i> <span
+								class="align-middle">Transactions</span>
+						</a>
+					</li>
+
+					<li id="tasks0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-tasks.html">
+							<i class="align-middle" data-feather="crosshair"></i> <span
+								class="align-middle">Tasks</span>
+						</a>
+					</li>
+
+					<li id="inventory0" class="sidebar-item active">
+						<a class="sidebar-link" href="pages-inventory.html">
+              <i class="align-middle" data-feather="box"></i> <span class="align-middle">Inventory</span>
+            </a>
+					</li>
+
+					<li id="purchase0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-purchase.html">
+              <i class="align-middle" data-feather="download"></i> <span class="align-middle">Purchase</span>
+            </a>
+					</li>
+
+
+					<li id="livedata0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-livedata.html">
+              <i class="align-middle" data-feather="activity"></i> <span class="align-middle">Live Data</span>
+            </a>
+					</li>
+
+					<li id="sensors0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-sensors.html">
+              <i class="align-middle" data-feather="compass"></i> <span class="align-middle">Sensors</span>
+            </a>
+					</li>
+
+					<li id="calculator0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-calculations.html">
+			  <i class="align-middle" data-feather="grid"></i> <span class="align-middle">Calculator</span>
+			</a>
+					</li>
+
+
+				</ul>
+
+
+			</div>
+		</nav>
+
+		<div class="main">
+			<nav class="navbar navbar-expand navbar-light navbar-bg">
+				<a class="sidebar-toggle js-sidebar-toggle">
+					<i class="hamburger align-self-center"></i>
+				</a>
+
+				<div class="navbar-collapse collapse">
+					<ul class="navbar-nav navbar-align">
+
+
+						
+
+						<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#"
+						data-bs-toggle="dropdown">
+						<img src="img/avatars/avatar.png" class="avatar img-fluid rounded me-1"
+							alt="Admin" /> <span id="adminName" class="text-dark"></span>
+					</a>
+					<script>
+						document.addEventListener( 'DOMContentLoaded', function (){
+							let username = localStorage.getItem('username')
+							if (username === null){
+							document.getElementById("adminName").innerHTML = "Not Logged In";
+							window.location.href = "../Notloggedin/notLoggedin.html"
+							return;
+							}
+							document.getElementById("adminName").innerHTML = username;
+							
+						})
+					</script>
+							<div class="dropdown-menu dropdown-menu-end" style="min-width: 10px;border-radius: 10px;margin-right: 2%;">
+								<a class="dropdown-item" href="#" onclick="logout()" style="color: red;">Log out</a>
+							</div>
+							<script src="./mycode/js/logout.js"></script>
+						</li>
+					</ul>
+				</div>
+			</nav>
+
+			<main class="content">
+				<div class="container-fluid p-0">
+					<div class="row">
+						<div class="col-md-8 col-xl-9">
+							<div class="card" style="width: 135%;">
+								<div class="card-header">
+									<h5 class="card-title mb-0">Inventory</h5>
+								</div>
+								<div class="card-body h-100">
+
+									<h4 id="error-message" style="color: rgb(243, 72, 72);"></h4>
+
+									<div>
+										<h2>Add new item to inventory</h2>
+										<div>
+										  <input type="text" id="itemName" placeholder="Item Name" required>
+										</div>
+										<div>
+										  <input type="text" id="brand" placeholder="Brand" required>
+										</div>
+										
+										<div>
+											<!-- <input type="date" id="replacementDate" placeholder="Replacement Date" class="textbox-n" required> -->
+											<input
+											placeholder="Replacement Date"
+											class="textbox-n"
+											type="text"
+											onfocus="(this.type='date')"
+											onblur="(this.type='text')"
+											id="replacementDate" required>
+										 </div>
+										<div>
+										  <input type="number" id="quantity" placeholder="Quantity" required>
+										</div>
+										<div>
+										  <button onclick="addItem()">Add Item</button>
+										</div>
+									  </div>
+
+									  <hr>
+									  <h2>Inventory</h2>
+									  <table id="inventoryTable">
+										<thead>
+										<tr>
+										  <th>Item Name</th>
+										  <th>Brand</th>
+										  <th>Replacement Date</th>
+										  <th>Quantity</th>
+										  <th style="text-align: center;">Action</th>
+										</tr>
+										</thead>
+										<tbody id="todoBody"></tbody>
+									  </table>
+									<script>				
+										function addItem() {
+										let companyName = localStorage.getItem('company');
+										var itemName = document.getElementById("itemName").value;
+										var brand = document.getElementById("brand").value;
+										var replacementDate = document.getElementById("replacementDate").value;
+										var quantity = parseInt(document.getElementById("quantity").value);
+										  // Validate input fields
+										  if (itemName.trim() === '' || brand.trim() === '' || replacementDate.trim() === '') {
+											// Display error message if any field is empty
+											document.getElementById("error-message").innerText = "Please fill out all fields";
+											return;
+										}
+									
+										// Convert the price and quantity to numbers
+										quantity = parseInt(quantity);
+									
+										// Validate price and quantity
+										if (isNaN(quantity) || quantity <= 0) {
+											// Display error message if price or quantity is not a valid number or less than or equal to zero
+											document.getElementById("error-message").innerText = "Please enter valid quantity";
+											return;
+										}
+									
+										if (replacementDate === "") {
+											replacementDate = null;
+										}
+										var formattedDate = new Date(replacementDate).toISOString();
+									
+										var item = {
+											CompanyName: companyName,
+											ItemName: itemName,
+											Brand: brand,
+											Quantity: quantity,
+											ReplacementDate: formattedDate
+										};
+									
+										fetch('http://localhost:2000/addItem', {
+											method: 'POST',
+											headers: {
+												'Content-Type': 'application/json'
+											},
+											body: JSON.stringify(item)
+										})
+										.then(response => response.json())
+										.then(data => {
+											if (data.Error) {
+												document.getElementById("error-message").innerText = data.Error;
+											} else {
+												// Clear input fields
+												document.getElementById("error-message").innerText = ""; // Clear error message
+												document.getElementById("itemName").value = "";
+												document.getElementById("brand").value = "";
+												document.getElementById("replacementDate").value = "";
+												document.getElementById("quantity").value = "";
+									
+												// Refresh inventory display
+												displayInventory();
+											}
+										})
+										.catch(error => {
+											console.error('Error:', error);
+										});
+									}
+									
+									function displayInventory() {
+										let companyName = localStorage.getItem('company');
+										if (companyName === null){
+											document.getElementById("error-message").innerText = "Log In to view your data";
+											return;
+
+										}
+										let searchFilter = {
+											CompanyName: companyName,
+										}
+										fetch('http://localhost:2000/displayItems',{
+											method: 'POST',
+											headers: {
+												'Content-Type': 'application/json'
+											},
+											body: JSON.stringify(searchFilter)
+										})
+										.then(response =>{
+											if (!response.ok) {
+												document.getElementById("error-message").innerText = "Unable to connect to server"
+												throw new Error('Unable to connect to server');
+											}
+											return response.json();
+										})
+										.then(data => {
+											if (data === null){
+												document.getElementById("error-message").innerText = "No items in inventory";
+												return;
+											}
+											var todoBody = document.getElementById("todoBody");
+											todoBody.innerHTML = "";
+											if (!data || data.length === 0) {
+												// Handle case where data is empty or undefined
+												document.getElementById("error-message").innerText = "No items in inventory";
+												return;
+											}
+									
+											
+											data.forEach(item => {
+												if (!item) {
+                                       			 // Handle case where sensor is null
+               									 console.error('Invalid sensor data:', item);
+              									  return; // Exit loop
+           										}
+												var replacementDate = new Date(item.ReplacementDate);
+									
+												// Format the date as dd/mm/yyyy
+												var formattedDate = replacementDate.toLocaleDateString('en-GB');
+												var row = document.createElement("tr");
+												row.innerHTML = `
+													<td>${item.ItemName}</td>
+													<td>${item.Brand}</td>
+													<td>${formattedDate}</td>
+													<td>${item.Quantity}</td>
+													<td style="text-align:center;"><button style="border-radius: 100%;" onclick="increaseQuantity('${item.ItemName}','${item.Brand}','${item.Quantity}')"><i class="fa fa-plus" style="font-size:13px"></i></button>&emsp;&ensp;
+														<button class="minus-button" style="border-radius: 100%;" onclick="decreaseQuantity('${item.ItemName}','${item.Brand}','${item.Quantity}')"><i class="fa fa-minus" style="font-size:13px"></i></button>&emsp;&emsp;&ensp;
+														<button class="delete-button" onclick="deleteItem('${item.ItemName}','${item.Brand}')">Delete</button></td>
+													`;
+												todoBody.appendChild(row);
+											});
+										})
+										.catch(error => {
+											document.getElementById("error-message").innerText = "Unable to connect to server"
+											console.error('Error:', error);
+										});
+									}
+									
+									
+									function deleteItem(itemName,brand) {
+										var item = { 
+											ItemName: itemName,
+											Brand: brand
+										 };
+									
+										fetch('http://localhost:2000/deleteItem', {
+											method: 'POST',
+											headers: {
+												'Content-Type': 'application/json'
+											},
+											body: JSON.stringify(item)
+										})
+										.then(response => response.json())
+										.then(data => {
+											if (data.Error) {
+												document.getElementById("error-message").innerText = data.Error;
+											} else {
+												document.getElementById("error-message").innerText = ""; // Clear error message
+												// Refresh inventory display
+												displayInventory();
+											}
+										})
+										.catch(error => {
+											console.error('Error:', error);
+										});
+									}
+									
+									
+									function increaseQuantity(itemName,brand,quantity) {
+										quantity = parseInt(quantity)
+										var item = { 
+											ItemName: itemName,
+											Brand: brand,
+											Quantity:(quantity+1)
+										 };
+									    console.log(JSON.stringify(item))
+										fetch('http://localhost:2000/updateItem', {
+											method: 'POST',
+											headers: {
+												'Content-Type': 'application/json'
+											},
+											body: JSON.stringify(item)
+										})
+										.then(response => response.json())
+										.then(data => {
+											if (data.Error) {
+												document.getElementById("error-message").innerText = data.Error;
+											} else {
+												document.getElementById("error-message").innerText = ""; // Clear error message
+												// Refresh inventory display
+												displayInventory();
+											}
+										})
+										.catch(error => {
+											console.error('Error:', error);
+										});
+									}
+
+									
+									function decreaseQuantity(itemName,brand,quantity) {
+										quantity = parseInt(quantity)
+										var item = { 
+											ItemName: itemName,
+											Brand: brand,
+											Quantity:(quantity-1)
+										 };
+									    console.log(JSON.stringify(item))
+										fetch('http://localhost:2000/updateItem', {
+											method: 'POST',
+											headers: {
+												'Content-Type': 'application/json'
+											},
+											body: JSON.stringify(item)
+										})
+										.then(response => response.json())
+										.then(data => {
+											if (data.Error) {
+												document.getElementById("error-message").innerText = data.Error;
+											} else {
+												document.getElementById("error-message").innerText = ""; // Clear error message
+												// Refresh inventory display
+												displayInventory();
+											}
+										})
+										.catch(error => {
+											console.error('Error:', error);
+										});
+									}
+
+									// Initial display of inventory on page load
+									displayInventory();
+									
+									</script>
+
+
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</main>
+
+			<footer class="footer">
+				<div class="container-fluid">
+					<div class="row text-muted">
+						<div class="col-6 text-start">
+							<p class="mb-0">
+								<a class="text-muted"  target="_blank"><strong>Optimus Power</strong></a> - <a class="text-muted"  target="_blank"><strong>Powerplant Management Application</strong></a>								&copy;
+
+							</p>
+						</div>
+						<div class="col-6 text-end">
+
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
+
+	<script src="js/app.js"></script>
+
+</body>
+
+</html>

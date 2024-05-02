@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
+	<meta name="author" content="Optimus Power">
+	<meta name="keywords"
+		content="Optimus Power, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="shortcut icon" href="img/icons/Power_Plant_logo.jpeg" />
+
+	<link rel="canonical" href="https://demo-basic.Optimus Power.io/pages-profile.html" />
+
+	<title>Sensors</title>
+
+	<link href="css/app.css" rel="stylesheet">
+	<link href="mycode/css/users.css" rel="stylesheet">
+	<link href="mycode/purchase/purchase.css" rel="stylesheet">
+	<link href="mycode/css/popup.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	<script src="./mycode/js/authorization.js"></script>
+</head>
+
+<body>
+	<div class="wrapper">
+		<nav id="sidebar" class="sidebar js-sidebar">
+			<div class="sidebar-content js-simplebar">
+				<a class="sidebar-brand" href="#">
+					<span class="align-middle">Optimus Power</span>
+				</a>
+
+				<ul class="sidebar-nav">
+
+
+					<li id="superadmindashboard0" class="sidebar-item">
+						<a class="sidebar-link" href="dashboard-superadmin.html">
+			  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+			</a>
+					</li>
+
+					<li id="dashboard0" class="sidebar-item">
+						<a class="sidebar-link" href="index.html">
+							<i class="align-middle" data-feather="sliders"></i> <span
+								class="align-middle">Dashboard</span>
+						</a>
+					</li>
+
+					<li id="roi0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-roi.html">
+							<i class="align-middle" data-feather="grid"></i> <span class="align-middle">ROI</span>
+						</a>
+					</li>
+
+
+
+					<li id="users0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-users.html">
+							<i class="align-middle" data-feather="user"></i> <span class="align-middle">Users</span>
+						</a>
+					</li>
+
+					<li id="ipaddress0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-ipaddress.html">
+							<i class="align-middle" data-feather="map-pin"></i> <span class="align-middle">IP
+								Address</span>
+						</a>
+					</li>
+
+					<li id="accounting0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-accounting.html">
+							<i class="align-middle" data-feather="layers"></i> <span
+								class="align-middle">Accounting</span>
+						</a>
+					</li>
+
+					<li id="transactions0" class="sidebar-item">
+						<a class="sidebar-link" href="../accounting/accounting.html">
+							<i class="align-middle" data-feather="dollar-sign"></i> <span
+								class="align-middle">Transactions</span>
+						</a>
+					</li>
+
+					<li id="tasks0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-tasks.html">
+							<i class="align-middle" data-feather="crosshair"></i> <span
+								class="align-middle">Tasks</span>
+						</a>
+					</li>
+
+					<li id="inventory0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-inventory.html">
+							<i class="align-middle" data-feather="box"></i> <span class="align-middle">Inventory</span>
+						</a>
+					</li>
+
+					<li id="purchase0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-purchase.html">
+							<i class="align-middle" data-feather="download"></i> <span
+								class="align-middle">Purchase</span>
+						</a>
+					</li>
+
+
+					<li id="livedata0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-livedata.html">
+              <i class="align-middle" data-feather="activity"></i> <span class="align-middle">Live Data</span>
+            </a>
+					</li>
+
+					<li id="sensors0" class="sidebar-item active">
+						<a class="sidebar-link" href="pages-sensors.html">
+							<i class="align-middle" data-feather="compass"></i> <span
+								class="align-middle">Sensors</span>
+						</a>
+					</li>
+
+					<li id="calculator0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-calculations.html">
+			  <i class="align-middle" data-feather="grid"></i> <span class="align-middle">Calculator</span>
+			</a>
+					</li>
+
+
+
+				</ul>
+
+
+			</div>
+		</nav>
+
+		<div class="main">
+			<nav class="navbar navbar-expand navbar-light navbar-bg">
+				<a class="sidebar-toggle js-sidebar-toggle">
+					<i class="hamburger align-self-center"></i>
+				</a>
+
+				<div class="navbar-collapse collapse">
+					<ul class="navbar-nav navbar-align">
+
+
+						<li class="nav-item dropdown">
+							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#"
+								data-bs-toggle="dropdown">
+								<i class="align-middle" data-feather="settings"></i>
+							</a>
+
+							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#"
+								data-bs-toggle="dropdown">
+								<img src="img/avatars/avatar.png" class="avatar img-fluid rounded me-1"
+									alt="Admin" /> <span id="adminName" class="text-dark"></span>
+							</a>
+							<script>
+								document.addEventListener( 'DOMContentLoaded', function (){
+									let username = localStorage.getItem('username')
+									if (username === null){
+									document.getElementById("adminName").innerHTML = "Not Logged In";
+							        window.location.href = "../Notloggedin/notLoggedin.html";
+									return;
+									}
+									document.getElementById("adminName").innerHTML = username;
+									
+								})
+							</script>
+							<div class="dropdown-menu dropdown-menu-end" style="min-width: 10px;border-radius: 10px;margin-right: 2%;">
+								<a class="dropdown-item" href="#" onclick="logout()" style="color: red;">Log out</a>
+							</div>
+							<script src="./mycode/js/logout.js"></script>
+						</li>
+					</ul>
+				</div>
+			</nav>
+
+			<main class="content">
+				<div class="container-fluid p-0">
+					<div class="row">
+						<div class="col-md-8 col-xl-9">
+							<div class="card" style="width: 135%;">
+								<div class="card-header">
+									<h5 class="card-title mb-0">Sensors</h5>
+								</div>
+								<div class="card-body h-100">
+
+									<h4 id="error-message" style="color: rgb(243, 72, 72);"></h4>
+
+									<div>
+										<h2>Add new Sensor</h2>
+										<div>
+											<input type="text" id="sensorName" placeholder="Sensor Name" required>
+										</div>
+										<div>
+											<input type="number" id="lowerLimit" placeholder="Lower Limit" required>
+										</div>
+
+										<div>
+											<input type="number" id="upperLimit" placeholder="Upper Limit" required>
+										</div>
+										<div>
+											<button onclick="insertSensor()">Add Item</button>
+										</div>
+									</div>
+
+									<hr>
+									<h2>Sensors</h2>
+									<table id="inventoryTable">
+										<thead>
+											<tr>
+												<th>Sensor Name</th>
+												<th>Lower Limit</th>
+												<th>Upper Limit</th>
+												<th style="text-align: center;">Action</th>
+											</tr>
+										</thead>
+										<tbody id="todoBody"></tbody>
+									</table>
+
+									<div style="text-align: center;" id="limitPopup" class="popup">
+										<div class="popup-content">
+											<h5 id="popup-error-message" style="color: rgb(243, 72, 72);"></h5>
+											<p style="font-size: medium;">Enter the upper and lower limits of the sensor :&nbsp;<span id="sensorname" style="color: blue;"></span></p>
+											<input type="number" id="updateLowerLimit" placeholder="Lower Limit" required>
+											<input type="number" id="updateUpperLimit" placeholder="Upper Limit" required>
+											<button id="confirmLimits" onclick="updateSensor()">Confirm</button>&emsp;&emsp;
+											<button class="delete-button" onclick="document.getElementById('limitPopup').style.display = 'none';">Cancel</button>
+										</div>
+									</div>
+
+
+									<script>
+										function insertSensor() {
+										let companyName = localStorage.getItem('company');
+											var sensorName = document.getElementById("sensorName").value;
+											var lowerLimit = document.getElementById("lowerLimit").value;
+											var upperLimit = document.getElementById("upperLimit").value;
+											// Validate input fields
+											if (sensorName.trim() === '') {
+												// Display error message if any field is empty
+												document.getElementById("error-message").innerText = "Please fill the sensor name";
+												return;
+											}
+
+											// Convert the price and quantity to numbers
+											lowerLimit = parseInt(lowerLimit);
+											upperLimit = parseInt(upperLimit);
+
+											// Validate price and quantity
+											if (isNaN(lowerLimit)) {
+												// Display error message if price or quantity is not a valid number or less than or equal to zero
+												document.getElementById("error-message").innerText = "Please enter valid Lower Limit";
+												return;
+											}
+
+											if (isNaN(upperLimit)) {
+												// Display error message if price or quantity is not a valid number or less than or equal to zero
+												document.getElementById("error-message").innerText = "Please enter valid Upper Limit";
+												return;
+											}
+
+											if (lowerLimit > upperLimit) {
+												// Display error message if price or quantity is not a valid number or less than or equal to zero
+												document.getElementById("error-message").innerText = "Upper Limit must be greater then Lower Limit";
+												return;
+											}
+
+											var sensor = {
+												CompanyName:companyName,
+												SensorName: sensorName,
+												LowerLimit: lowerLimit,
+												UpperLimit: upperLimit,
+											};
+
+											fetch('http://localhost:2000/insertSensor', {
+												method: 'POST',
+												headers: {
+													'Content-Type': 'application/json'
+												},
+												body: JSON.stringify(sensor)
+											})
+												.then(response => response.json())
+												.then(data => {
+													if (data.Error) {
+														document.getElementById("error-message").innerText = data.Error;
+													} else {
+														// Clear input fields
+														document.getElementById("error-message").innerText = ""; // Clear error message
+														document.getElementById("sensorName").value = "";
+														document.getElementById("upperLimit").value = "";
+														document.getElementById("lowerLimit").value = "";
+
+														// Refresh sensors display
+														displaySensors();
+													}
+												})
+												.catch(error => {
+													console.error('Error:', error);
+												});
+										}
+
+										function displaySensors() {
+										let companyName = localStorage.getItem('company');
+										if (companyName === null){
+											document.getElementById("error-message").innerText = "Login to view sensor information";
+											return;
+										}
+											let searchFilter = {
+												CompanyName:companyName,
+											}
+											fetch('http://localhost:2000/displaySensors',{
+												method: 'POST',
+												headers: {
+													'Content-Type': 'application/json'
+												},
+												body: JSON.stringify(searchFilter)
+											})
+												.then(response => {
+													if (!response.ok) {
+														document.getElementById("error-message").innerText = "Unable to connect to server"
+														throw new Error('Unable to connect to server');
+													}
+													return response.json();
+												})
+												.then(data => {
+													if (!data || data.length === 0) {
+														// Handle case where data is empty or undefined
+														document.getElementById("error-message").innerText = "No sensors registered";
+
+													}
+
+													var todoBody = document.getElementById("todoBody");
+													todoBody.innerHTML = "";
+
+													data.forEach(sensor => {
+														if (!sensor) {
+															// Handle case where sensor is null
+															console.error('Invalid sensor data:', sensor);
+															document.getElementById("todoBody").innerHTML = "";
+															return; // Exit loop
+														}
+
+														var row = document.createElement("tr");
+														row.innerHTML = `
+													<td>${sensor.SensorName}</td>
+													<td>${sensor.LowerLimit}</td>
+													<td>${sensor.UpperLimit}</td>
+													<td style="text-align:center;"><button class="minus-button" onclick="displayPopup('${sensor.SensorName}')">Update</button>&emsp;&emsp;
+														<button class="delete-button" onclick="deleteSensor('${sensor.SensorName}','${sensor.LowerLimit}','${sensor.UpperLimit}')">Delete</button></td>
+												`;
+														todoBody.appendChild(row);
+													});
+												})
+												.catch(error => {
+													console.error('Error:', error);
+												});
+										}
+
+
+										function deleteSensor(sensorName, lowerLimit, upperLimit) {
+										let companyName = localStorage.getItem('company');
+											lowerLimit = parseInt(lowerLimit);
+											upperLimit = parseInt(upperLimit);
+											var sensor = {
+												CompanyName:companyName,
+												SensorName: sensorName,
+												LowerLimit: lowerLimit,
+												UpperLimit: upperLimit
+											};
+
+											fetch('http://localhost:2000/deleteSensor', {
+												method: 'POST',
+												headers: {
+													'Content-Type': 'application/json'
+												},
+												body: JSON.stringify(sensor)
+											})
+												.then(response => response.json())
+												.then(data => {
+													if (data.Error) {
+														document.getElementById("error-message").innerText = data.Error;
+													} else {
+														document.getElementById("error-message").innerText = ""; // Clear error message
+														// Refresh inventory display
+														displaySensors();
+													}
+												})
+												.catch(error => {
+													console.error('Error:', error);
+												});
+										}
+
+
+										let popUpSensorName;
+										function displayPopup(sensorName){
+											const openPopupButton = document.getElementById('openPopupButton');
+											const limitPopup = document.getElementById('limitPopup');
+											const confirmLimits = document.getElementById('confirmLimits');
+											popUpSensorName = sensorName
+											let sensorname = document.getElementById('sensorname');
+											sensorname.innerHTML = sensorName
+
+											limitPopup.style.display = 'block';
+										}
+
+										function updateSensor() {
+											const updateLowerLimit = document.getElementById('updateLowerLimit').value;
+											const updateUpperLimit = document.getElementById('updateUpperLimit').value;
+											lowerLimit = parseInt(updateLowerLimit);
+											upperLimit = parseInt(updateUpperLimit);
+											
+											if (isNaN(lowerLimit)){
+												document.getElementById('popup-error-message').innerText = "Please fill the lower limit"
+												return
+											}
+											if (lowerLimit>upperLimit || isNaN(upperLimit)){
+												document.getElementById('popup-error-message').innerText = "Upper limit must be greater than lower limit";
+												return
+											}
+
+											document.getElementById('popup-error-message').innerText = ""
+
+											sensorName = popUpSensorName;
+											lowerLimit = parseInt(lowerLimit);
+											upperLimit = parseInt(upperLimit);
+											var sensor = {
+												SensorName: sensorName,
+												LowerLimit: lowerLimit,
+												UpperLimit: upperLimit
+											};
+
+											fetch('http://localhost:2000/updateSensor', {
+												method: 'POST',
+												headers: {
+													'Content-Type': 'application/json'
+												},
+												body: JSON.stringify(sensor)
+											})
+												.then(response => response.json())
+												.then(data => {
+													if (data.Error) {
+														document.getElementById("error-message").innerText = data.Error;
+													} else {
+														document.getElementById("error-message").innerText = ""; // Clear error message
+														// Refresh inventory display
+														document.getElementById("limitPopup").style.display = 'none'
+														document.getElementById("updateUpperLimit").value = ""
+														document.getElementById("updateLowerLimit").value = ""
+														displaySensors();
+													}
+												})
+												.catch(error => {
+													console.error('Error:', error);
+												});
+										}
+
+										// Initial display of inventory on page load
+										displaySensors();
+
+									</script>
+
+
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</main>
+
+			<footer class="footer">
+				<div class="container-fluid">
+					<div class="row text-muted">
+						<div class="col-6 text-start">
+							<p class="mb-0">
+								<a class="text-muted"  target="_blank"><strong>Optimus Power</strong></a> - <a class="text-muted"  target="_blank"><strong>Powerplant Management Application</strong></a>								&copy;
+
+							</p>
+						</div>
+						<div class="col-6 text-end">
+
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
+
+	<script src="js/app.js"></script>
+
+</body>
+
+</html>

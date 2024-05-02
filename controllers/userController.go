@@ -128,7 +128,16 @@ func (controller *UserController)ValidateTotp(c *gin.Context){
 }
 
 func (controller *UserController)DisplayUser(c *gin.Context){
-	allUser,err := controller.UserService.DisplayUser()
+	var searchFilter models.SearchFilter
+
+	if err := c.ShouldBindJSON(&searchFilter); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"Error": "Invalid Json format",
+		})
+		return
+	}
+
+	allUser,err := controller.UserService.DisplayUser(&searchFilter)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError,gin.H{

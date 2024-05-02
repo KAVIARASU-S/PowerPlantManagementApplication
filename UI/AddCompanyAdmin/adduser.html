@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Company Admin</title>
+    <link rel="stylesheet" href="adduser.css">
+<link rel="icon" type="image/x-icon" href="../static/img/icons/Power_Plant_logo.jpeg">
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h2 class="titleText">Add Company Admin</h2>
+            <form id="adminForm">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required aria-label="Username">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required aria-label="Password">
+                </div>
+                <div class="form-group">
+                    <label for="company">Company:</label>
+                    <input type="text" id="company" name="company" placeholder="Enter your company name" required aria-label="Company">
+                </div>
+                <div class="form-group">
+                    <label for="powerplant">Powerplant Type:</label>
+                    <select id="powerplant" name="powerplant" required aria-label="Powerplant Type">
+                        <option value="" disabled selected>Select Powerplant Type</option>
+                        <option value="Thermal">Thermal</option>
+                        <option value="Hydro">Hydro</option>
+                        <option value="Wind">Wind</option>
+                        <option value="Nuclear">Nuclear</option>
+                    </select>
+                </div>
+                <button type="submit">Submit</button>
+                <div id="message" aria-live="assertive"></div>
+            </form>
+            <div id="qr">
+
+            </div>
+        </div>
+    </div>
+
+    <script src="adduser.js"></script>
+</body>
+</html>
+

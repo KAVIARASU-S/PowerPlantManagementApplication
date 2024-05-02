@@ -8,6 +8,6 @@ type Iuser interface{
 	ValidateIP (ip *models.IPAddress) (err error)
 	InsertIP (ip *models.IPAddress) (err error)
 	ValidateTotp (user *models.Login) (company string,role string,plantType string,err error)
-	DisplayUser () (allusers *[]models.ShowUser,err error)
+	DisplayUser (searchFilter *models.SearchFilter) (allusers *[]models.ShowUser,err error)
 	DisplayIP () (allusers *[]models.IPAddress,err error)
 }

@@ -1,0 +1,76 @@
+/* Define styles for elements with the "me" suffix class */
+
+.userDataTable-me {
+    width: 100%; /* Set the table width to 100% */
+    border-collapse: collapse;
+}
+
+.userDataHeader-me {
+    border: 1px solid #ddd;
+    padding: 8px; /* Increased padding */
+    text-align: center; /* Align text to center */
+    background-color: #f2f2f2;
+    font-size: 18px; /* Increased font size */
+}
+
+.userDataBody-me td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    font-size: 18px;
+}
+
+.userDataBody-me tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.userDataBody-me tr:hover {
+    background-color: #ddd;
+}
+
+.userDataTitle-me {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.addUserBtn-me {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: auto;
+    margin-bottom: 20px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.addUserBtn-me:hover {
+    background-color: #45a049;
+    text-decoration: none;
+
+}
+
+.header-me {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Distribute items evenly */
+}
+
+.form-container-me input[type="text"] {
+    width: calc(33% - 20px); /* Adjust width according to your preference */
+    padding: 7px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Include padding and border in width calculation */
+    font-size: 16px;
+    color: #333;
+    outline: none; /* Remove default input focus outline */
+}
+
+

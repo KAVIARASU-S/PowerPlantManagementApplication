@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Enter TOTP</title>
+  <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/all.css'>
+  <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/fontawesome.css'>
+  <link rel="stylesheet" href="./totp.css">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+<link rel="icon" type="image/x-icon" href="../static/img/icons/Power_Plant_logo.jpeg">
+  <script src="totp.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="Company_Name"><b>Optimus Power</b></div>
+    <div class="screen">
+        <div class="screen__content">
+            <form class="login" id="otpForm">
+                <div class="login__field">
+                    <span class="input-icon">
+                        <i class="fas fa-key"></i>
+                    </span>            
+                    <input id="totp" type="password" class="login__input" placeholder="Enter TOTP">
+                </div>
+                <button id="submitBtn" class="button login__submit">
+                    <span class="button__text">Submit</span>
+                </button>
+                <div class="response" id="responseMessage"></div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success Page</title>
+</head>
+<body>
+    <h1>Success Page</h1>
+    <div id="userInfo">
+        <!-- Username and Company information will be displayed here -->
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Retrieve username and company from local storage
+            let username = localStorage.getItem('username');
+            let company = localStorage.getItem('company');
+            let role = localStorage.getItem('role');
+            let planttype = localStorage.getItem('powerplanttype');
+
+            // Display username and company information on the page
+            if (username && company) {
+                let userInfoDiv = document.getElementById('userInfo');
+                userInfoDiv.innerHTML = '<p>Username: ' + username + '</p>' +
+                                         '<p>Company: ' + company + '</p>' +
+                                         '<p>Role: ' + role + '</p>' +
+                                         '<p>Plant Type: ' + planttype + '<p>';
+            } else {
+                // If either username or company is not available in local storage
+                let userInfoDiv = document.getElementById('userInfo');
+                userInfoDiv.innerHTML = '<p>Username or Company information not found.</p>';
+            }
+        });
+    </script>
+</body>
+</html>

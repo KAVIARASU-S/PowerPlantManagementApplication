@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
+	<meta name="author" content="Optimus Power">
+	<meta name="keywords"
+		content="Optimus Power, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="shortcut icon" href="img/icons/Power_Plant_logo.jpeg" />
+
+	<link rel="canonical" href="https://demo-basic.Optimus Power.io/pages-profile.html" />
+
+	<title>Users</title>
+
+	<link href="css/app.css" rel="stylesheet">
+	<link href="mycode/css/users.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	<script src="./mycode/js/authorization.js"></script>
+</head>
+
+<body>
+	<div class="wrapper">
+		<nav id="sidebar" class="sidebar js-sidebar">
+			<div class="sidebar-content js-simplebar">
+				<a class="sidebar-brand" href="#">
+					<span class="align-middle">Optimus Power</span>
+				</a>
+
+				<ul class="sidebar-nav">
+
+
+					<li id="superadmindashboard0" class="sidebar-item">
+						<a class="sidebar-link" href="dashboard-superadmin.html">
+			  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+			</a>
+					</li>
+
+					<li id="dashboard0" class="sidebar-item">
+						<a class="sidebar-link" href="index.html">
+							<i class="align-middle" data-feather="sliders"></i> <span
+								class="align-middle">Dashboard</span>
+						</a>
+					</li>
+
+					<li id="roi0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-roi.html">
+							<i class="align-middle" data-feather="grid"></i> <span
+								class="align-middle">ROI</span>
+						</a>
+					</li>
+
+
+
+					<li id="users0" class="sidebar-item active">
+						<a class="sidebar-link" href="pages-users.html">
+							<i class="align-middle" data-feather="user"></i> <span class="align-middle">Users</span>
+						</a>
+					</li>
+
+					<li id="ipaddress0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-ipaddress.html">
+              <i class="align-middle" data-feather="map-pin"></i> <span class="align-middle">IP Address</span>
+            </a>
+					</li>
+
+					<li id="accounting0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-accounting.html">
+							<i class="align-middle" data-feather="layers"></i> <span
+								class="align-middle">Accounting</span>
+						</a>
+					</li>
+
+					<li id="transactions0" class="sidebar-item">
+						<a class="sidebar-link" href="../accounting/accounting.html">
+							<i class="align-middle" data-feather="dollar-sign"></i> <span
+								class="align-middle">Transactions</span>
+						</a>
+					</li>
+
+					<li id="tasks0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-tasks.html">
+              <i class="align-middle" data-feather="crosshair"></i> <span class="align-middle">Tasks</span>
+            </a>
+					</li>
+
+					<li id="inventory0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-inventory.html">
+              <i class="align-middle" data-feather="box"></i> <span class="align-middle">Inventory</span>
+            </a>
+					</li>
+
+					<li id="purchase0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-purchase.html">
+              <i class="align-middle" data-feather="download"></i> <span class="align-middle">Purchase</span>
+            </a>
+					</li>
+
+
+					<li id="livedata0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-livedata.html">
+              <i class="align-middle" data-feather="activity"></i> <span class="align-middle">Live Data</span>
+            </a>
+					</li>
+
+					<li id="sensors0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-sensors.html">
+              <i class="align-middle" data-feather="compass"></i> <span class="align-middle">Sensors</span>
+            </a>
+					</li>
+
+					<li id="calculator0" class="sidebar-item">
+						<a class="sidebar-link" href="pages-calculations.html">
+			  <i class="align-middle" data-feather="grid"></i> <span class="align-middle">Calculator</span>
+			</a>
+					</li>
+
+				</ul>
+
+
+			</div>
+		</nav>
+
+		<div class="main">
+			<nav class="navbar navbar-expand navbar-light navbar-bg">
+				<a class="sidebar-toggle js-sidebar-toggle">
+					<i class="hamburger align-self-center"></i>
+				</a>
+
+				<div class="navbar-collapse collapse">
+					<ul class="navbar-nav navbar-align">
+
+
+						<li class="nav-item dropdown">
+							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#"
+								data-bs-toggle="dropdown">
+								<i class="align-middle" data-feather="settings"></i>
+							</a>
+
+							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#"
+								data-bs-toggle="dropdown">
+								<img src="img/avatars/avatar.png" class="avatar img-fluid rounded me-1"
+									alt="Admin" /> <span id="adminName" class="text-dark"></span>
+							</a>
+							<script>
+								document.addEventListener( 'DOMContentLoaded', function (){
+									let username = localStorage.getItem('username')
+									if (username === null){
+									document.getElementById("adminName").innerHTML = "Not Logged In";
+							        window.location.href = "../Notloggedin/notLoggedin.html";
+									return;
+									}
+									document.getElementById("adminName").innerHTML = username;
+									
+								})
+							</script>
+							<div class="dropdown-menu dropdown-menu-end" style="min-width: 10px;border-radius: 10px;margin-right: 2%;">
+								<a class="dropdown-item" href="#" onclick="logout()" style="color: red;">Log out</a>
+							</div>
+							<script src="./mycode/js/logout.js"></script>
+						</li>
+					</ul>
+				</div>
+			</nav>
+
+			<main class="content">
+				<div class="container-fluid p-0">
+					<div class="row">
+						<div class="col-md-8 col-xl-9">
+							<div class="card" style="width: 135%;">
+								<div class="card-header">
+									<h5 class="card-title mb-0">Users</h5>
+								</div>
+								<div class="card-body h-100">
+
+									<h4 id="error-message" style="color: rgb(243, 72, 72);"></h4>
+									<div class="header-me">
+										<h2 class="userDataTitle-me">User Data</h2>
+										<a onclick="createUser()" class="addUserBtn-me">Add User</a>
+									</div>
+									<br>
+									<table id="userData" class="userDataTable-me">
+										<thead>
+											<tr>
+												<th class="userDataHeader-me">Username</th>
+												<th class="userDataHeader-me">Company</th>
+												<th class="userDataHeader-me">Role</th>
+												<th class="userDataHeader-me">Powerplant Type</th>
+											</tr>
+										</thead>
+										<tbody id="userDataBody" class="userDataBody-me">
+											<!-- User data will be dynamically inserted here -->
+										</tbody>
+									</table>
+
+									<script>
+										document.addEventListener('DOMContentLoaded', function () {
+										let companyName = localStorage.getItem('company');
+											let searchFilter = {
+												CompanyName:companyName,
+											}
+											// Function to fetch user data and populate the table
+											function fetchUserData() {
+												fetch('http://localhost:2000/displayUser',{
+											method: 'POST',
+											headers: {
+												'Content-Type': 'application/json'
+											},
+											body: JSON.stringify(searchFilter)
+										})
+													.then(response => {
+														if (response.status === 500){
+															response.json().then(function(data){
+															document.getElementById('error-message').innerHTML=data.Error;
+															})
+															}else if (!response.ok) {
+															throw new Error('Network response was not ok');
+														
+														}
+														return response.json();
+													})
+													.then(data => {
+														const userDataBody = document.getElementById('userDataBody');
+														userDataBody.innerHTML = ''; // Clear existing table data
+
+														data.forEach(user => {
+															const row = `
+																	<tr>
+																		<td>${user.UserName}</td>
+																		<td>${user.Company}</td>
+																		<td>${user.Role}</td>
+																		<td>${user.PowerplantType}</td>
+																	</tr>`;
+															userDataBody.innerHTML += row;
+														});
+													})
+													.catch(error => {
+														document.getElementById('error-message').innerHTML="Error connecting to server";
+														console.error('Error fetching user data:', error.message);
+														// You can handle errors here, e.g., display an error message
+													});
+											}
+
+											// Call the fetchUserData function when the page is loaded
+											fetchUserData();
+										});
+
+										function createUser(){
+										let companyName = localStorage.getItem('company');
+										if (companyName === "SuperAdmin"){
+											window.location.href = "../AddCompanyAdmin/adduser.html"
+										}else{
+											window.location.href = "../AddUser/adduser.html"
+										}
+										}
+									</script>
+
+
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</main>
+
+			<footer class="footer">
+				<div class="container-fluid">
+					<div class="row text-muted">
+						<div class="col-6 text-start">
+							<p class="mb-0">
+								<a class="text-muted"  target="_blank"><strong>Optimus Power</strong></a> - <a class="text-muted"  target="_blank"><strong>Powerplant Management Application</strong></a>								&copy;
+
+							</p>
+						</div>
+						<div class="col-6 text-end">
+
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
+
+	<script src="js/app.js"></script>
+
+</body>
+
+</html>

@@ -22,13 +22,14 @@ func InitAccounting (accountingCollection *mongo.Collection)interfaces.IAccounti
 	}
 }
 
-func (accountingData *AccountingService) DisplayTransactions()(allTransactions *[]models.Transaction,err error){
+func (accountingData *AccountingService) DisplayTransactions(searchFilter *models.SearchFilter)(allTransactions *[]models.Transaction,err error){
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
+	filter := bson.M{"CompanyName":searchFilter.CompanyName}
 	opts := options.Find().SetSort(map[string]int{"Date": -1})
 
-	result, err := accountingData.AccountingCollection.Find(ctx, bson.M{},opts)
+	result, err := accountingData.AccountingCollection.Find(ctx, filter,opts)
 	if err != nil {
 		log.Println("Error Finding transactions in mongoDB ", err)
 		return nil, err
@@ -64,13 +65,16 @@ func (accountingData *AccountingService) InsertTransaction(transaction *models.T
 	return nil
 }
 
-func (accountingData *AccountingService) DisplayAccounting()(allAccounts *models.Accounting,err error){
+func (accountingData *AccountingService) DisplayAccounting(searchFilter *models.SearchFilter)(allAccounts *models.Accounting,err error){
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
 	// Now we find the total of incomes
 
-	totIncomefilter := bson.M{"TransactionType": "Income"}
+	totIncomefilter := bson.M{
+		"CompanyName":searchFilter.CompanyName,
+		"TransactionType": "Income",
+	}
 
 	totIncomepipeline := bson.A{
         bson.D{{"$match", totIncomefilter}},
@@ -113,7 +117,10 @@ func (accountingData *AccountingService) DisplayAccounting()(allAccounts *models
 	
 	//Now we find the total of expenses
 
-	totExpensefilter := bson.M{"TransactionType": "Expense"}
+	totExpensefilter := bson.M{
+		"CompanyName": searchFilter.CompanyName,
+		"TransactionType": "Expense",
+	}
 
 	totExpensepipeline := bson.A{
         bson.D{{"$match", totExpensefilter}},
@@ -155,7 +162,10 @@ func (accountingData *AccountingService) DisplayAccounting()(allAccounts *models
 
 	// Now we get all the income
 
-	incomefilter := bson.M{"TransactionType": "Income"}
+	incomefilter := bson.M{
+		"CompanyName": searchFilter.CompanyName,
+		"TransactionType": "Income",
+	}
 
 	incomeopts := options.Find().SetSort(map[string]int{"Date": 1})
 
@@ -174,7 +184,10 @@ func (accountingData *AccountingService) DisplayAccounting()(allAccounts *models
 
 	// Now we get all the expenses
 
-	expenseFilter := bson.M{"TransactionType": "Expense"}
+	expenseFilter := bson.M{
+		"CompanyName": searchFilter.CompanyName,
+		"TransactionType": "Expense",
+	}
 
 	expenseopts := options.Find().SetSort(map[string]int{"Date": 1})
 
@@ -203,6 +216,6 @@ func (accountingData *AccountingService) DisplayAccounting()(allAccounts *models
 	accounts.TotalExpense = totalExpense
 	accounts.Profit = profit
 
-	log.Println("then accounts is",accounts)
+	log.Println("The accounts is",accounts)
 	return &accounts,nil
 }
